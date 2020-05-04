@@ -3,15 +3,30 @@
   <head>
     <title>Home Page</title>
 
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 
+    <!-- Font  -->
+    <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Montserrat|Quicksand:300,400,500,600,700&display=swap" rel="stylesheet">
+    <!-- Javascript -->
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
   </head>
 
   <body>
-    <h1>Hello World!</h1>
+    <%- include('partials/navbar_logged_out') %>
+    <main>
+      <section class="search_box">
+        <label>What do you want to learn today?</label>
+        <input name="text" placeholder="Type on in"></input>
+        <div class="search_anchors">
+          <a class="search_anchors" href="/results">Teach Me</a>
+          <a class="search_anchors" href="/results">Trending</a>
+          <a class="search_anchors" href="/results">Surprise Me</a>
+        </div>
+      </section>
+    </main>
   </body>
 </html>

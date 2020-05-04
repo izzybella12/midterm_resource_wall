@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Home Page</title>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/register_new.css" type="text/css" />
+    <!-- Font  -->
+    <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Montserrat|Quicksand:300,400,500,600,700&display=swap" rel="stylesheet">
+    <!-- Javascript -->
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
+  </head>
+
+  <body>
+    <!-- <%- include('partials/navbar_logged_out') %> -->
+    <main>
+      <section class="new_resource">
+        <label>Create a new resource</label>
+        <div class="new_title">
+          <span>Title:</span>
+          <textarea></textarea>
+        </div>
+        <div class="new_description">
+          <span>Description</span>
+          <textarea></textarea>
+        </div>
+        <div class="new_link">
+          <span>Link:</span>
+          <textarea></textarea>
+        </div>
+        <div class="new_keywords">
+          <span>Keywords:</span>
+          <textarea></textarea>
+        </div>
+        <div class="new_category">
+          <span>Category:</span>
+          <textarea></textarea>
+        </div>
+
+        <form method="POST" action="/profile">
+          <button type="submit"></button>
+        </form>
+
+      </section>
+    </main>
+  </body>
+</html>
