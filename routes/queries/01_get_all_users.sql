@@ -4,7 +4,13 @@ WHERE email = x;
 
 
 -- trends
-SELECT resources.*,
+SELECT resources.*, AVG(resource_reviews.ratings) AS rating
 FROM resources
 JOIN resource_reviews ON resource_id = resources.id
-WHERE
+-- how to get date within 24 hours
+GROUP BY AVG(resource_reviews.ratings)
+HAVING resource_reviews.rating > 4
+;
+
+-- get all pins
+SELECT resources.*,
