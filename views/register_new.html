@@ -20,28 +20,35 @@
       <section class="new_resource">
         <label>Create a new resource</label>
         <div class="new_title">
-          <span>Title:</span>
-          <textarea></textarea>
+          <input placeholder="Title"></input>
         </div>
         <div class="new_description">
-          <span>Description</span>
-          <textarea></textarea>
+          <textarea placeholder="Description"></textarea>
         </div>
         <div class="new_link">
-          <span>Link:</span>
-          <textarea></textarea>
-        </div>
-        <div class="new_keywords">
-          <span>Keywords:</span>
-          <textarea></textarea>
+          <input placeholder="Link"></input>
         </div>
         <div class="new_category">
-          <span>Category:</span>
-          <textarea></textarea>
+          <select required>
+            <option value="" selected>Select a Category</option>
+            <option>Automotive</option>
+            <option>Education & Communication</option>
+            <option>Finance & Business</option>
+            <option>Fitness & Wellness</option>
+            <option>Food</option>
+            <option>Health & Personal Care</option>
+            <option>Hobbies & Crafts</option>
+            <option>Home Improvement</option>
+            <option>Lifestyle</option>
+            <option>Pets & Animals</option>
+            <option>Technology</option>
+          </select>
         </div>
-
+        <div class="new_keywords">
+          <input placeholder="Keywords"></input>
+        </div>
         <form method="POST" action="/profile">
-          <button type="submit"></button>
+          <button type="submit">Submit</button>
         </form>
 
       </section>
