@@ -92,9 +92,6 @@ module.exports = (db) => {
     FROM resources
     JOIN resource_reviews ON resource_id = resources.id
     WHERE resources.category LIKE '%$1%' OR resources.keywords LIKE ''
-    GROUP BY AVG(resource_reviews.rating) AS rating, COUNT(resource_reviews.likes AS likes
-    HAVING resource_reviews.likes = true
-    ORDER BY
     `
 
 //     db.query(queryString, [resources.category] => {
@@ -107,8 +104,15 @@ module.exports = (db) => {
 
 
 //     })
-      console.log(req.query.split(''))
-    res.send('Ok')
+      const { search } = req.query;
+      // search.length()
+      console.log(search)
+      res.send('Ok')
+
+
+    // queryString += 1` GROUP BY AVG(resource_reviews.rating) AS rating, COUNT(resource_reviews.likes AS likes
+    //   HAVING resource_reviews.likes = true
+    //   ORDER BY`
 
     // "/results/:resourceId"
   });
