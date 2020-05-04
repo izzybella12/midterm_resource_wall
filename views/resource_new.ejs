@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Home Page</title>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/resource_new.css" type="text/css" />
+    <!-- Font  -->
+    <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Montserrat|Quicksand:300,400,500,600,700&display=swap" rel="stylesheet">
+    <!-- Javascript -->
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
+  </head>
+
+  <body>
+    <%- include('partials/navbar_logged_out') %>
+    <main class="resource_new">
+      <form method="POST" action="/profile">
+        <div class="form_input">
+          <h2>Create a new resource</h2>
+        <div>
+          <input class="new_resource_textbox" type="text" name="title" placeholder="Title"></input>
+        </div>
+        <div>
+          <textarea class="new_resource_textbox" type="text" name="description" placeholder="Description"></textarea>
+        </div>
+        <div>
+          <input class="new_resource_textbox" type="text" name="link" placeholder="Link"></input>
+        </div>
+        <div>
+          <select class="new_resource_textbox" name="category" required>
+            <option value="" selected>Select a Category</option>
+            <option>Automotive</option>
+            <option>Education & Communication</option>
+            <option>Finance & Business</option>
+            <option>Fitness & Wellness</option>
+            <option>Food</option>
+            <option>Health & Personal Care</option>
+            <option>Hobbies & Crafts</option>
+            <option>Home Improvement</option>
+            <option>Lifestyle</option>
+            <option>Pets & Animals</option>
+            <option>Technology</option>
+          </select>
+        </div>
+        <div>
+          <input class="new_resource_textbox" type="text" name="keywords" placeholder="Keywords"></input>
+        </div>
+        <form method="POST" action="/profile">
+          <button type="submit">Submit</button>
+        </form>
+        </div>
+      </form>
+    </main>
+  </body>
+</html>
