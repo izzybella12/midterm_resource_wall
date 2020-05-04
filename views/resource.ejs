@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Home Page</title>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/register_new.css" type="text/css" />
+    <!-- Font  -->
+    <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Montserrat|Quicksand:300,400,500,600,700&display=swap" rel="stylesheet">
+    <!-- Javascript -->
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
+  </head>
+
+  <body>
+    <!-- <%- include('partials/navbar_logged_out') %> -->
+    <main>
+      <section class="resource_info">
+        <span class="resource_info_title"></span>
+        <span class="resource_info_description"></span>
+        <span class="resource_info_website"></span>
+        <span class="resource_info_rating"></span>
+        <span class="resource_info_p"></span>
+      </section>
+
+      <section class="resource_info_comments">
+
+      </section>
+
+      <section class="resource_info_write_comment">
+        <form method="POST" action="/resource">
+          <textarea></textarea>
+          <button type="submit">Comment</button>
+          <output>140</output>
+          <span id="error"></span>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,45 +1,9 @@
 // See: https://sass-lang.com/
 
-body {
+body.homepage {
   display: flex;
   flex-direction: column;
   background-image: linear-gradient(to left, #6BD1AA, #58D0BE, #50CDCF, #57CADC, #69C5E4, #70C5E8, #77C5EB, #7EC5EE, #77CAF2, #70CFF6, #68D4F9, #5FD9FB);
-}
-
-// Navbar
-header.navbar_header {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  background-color: white;
-  height: 5em;
-  padding-left: 2em;
-  font-size: x-large;
-  nav.navbar_features {
-    display: flex;
-    justify-content: space-between;
-    a.page_title {
-      color: black;
-      text-decoration: none;
-      font-family: 'Quicksand', sans-serif;
-      margin-right: 2em;
-    }
-    div.login_register {
-      display: flex;
-      input.login_textbox{
-        color: black;
-        font-family: 'Quicksand', sans-serif;
-        background-color: lavenderblush;
-      }
-      button.nav_buttons {
-        margin-left: 1em;
-        background-color: white;
-        color: black;
-        font-family: 'Quicksand', sans-serif;
-
-      }
-    }
-  }
 }
 
 // Homepage

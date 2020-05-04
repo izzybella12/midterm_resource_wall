@@ -47,7 +47,19 @@ app.use("/api/widgets", widgetsRoutes(db));
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
-  res.render("index");
+  res.render("homepage");
+});
+
+app.get("/resource_new", (req, res) => {
+  res.render("resource_new");
+});
+
+app.get("/registration", (req, res) => {
+  res.render("registration");
+});
+
+app.get("/resource", (req, res) => {
+  res.render("resource");
 });
 
 app.listen(PORT, () => {
