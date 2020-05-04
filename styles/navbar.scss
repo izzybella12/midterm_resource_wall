@@ -1,0 +1,37 @@
+header.navbar_header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: white;
+  height: 5em;
+  padding-left: 2em;
+  font-size: x-large;
+  nav.navbar_features {
+    display: flex;
+    justify-content: space-between;
+    a.page_title {
+      color: black;
+      text-decoration: none;
+      font-family: 'Quicksand', sans-serif;
+      margin-right: 2em;
+    }
+    div.login_register {
+      display: flex;
+      input.login_textbox{
+        color: black;
+        font-family: 'Quicksand', sans-serif;
+        background-color: lavenderblush;
+        border: 1px solid #ced4da;
+        border-radius: .25rem;
+        padding: .375rem .75rem;
+      }
+      button.nav_buttons {
+        margin-left: 1em;
+        background-color: white;
+        color: black;
+        font-family: 'Quicksand', sans-serif;
+
+      }
+    }
+  }
+}
