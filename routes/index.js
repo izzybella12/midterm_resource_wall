@@ -7,8 +7,8 @@
 
 const express = require('express');
 const router  = express.Router();
-const bodyParser = require("body-parser");
-const PORT = 8080; // default port 8080
+// const bodyParser = require("body-parser");
+// const PORT = 8080; // default port 8080
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
