@@ -53,9 +53,9 @@ app.get("/registration", (req, res) => {
   res.render("registration");
 });
 
-// app.get("/:username" , (req, res) => {
-//   res.render("profile");
-// });
+app.get("/:username" , (req, res) => {
+  res.render("profile");
+});
 
 app.get("/results", (req, res) => {
   res.render("results")
