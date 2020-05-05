@@ -49,17 +49,22 @@ app.use("/resources", resourceRoutes(db));
 app.get("/", (req, res) => {
   res.render("homepage");
 });
-// app.get("/:userId" , (req, res) => {
+app.get("/registration", (req, res) => {
+  res.render("registration");
+});
+
+// app.get("/:username" , (req, res) => {
 //   res.render("profile");
-// })
+// });
+
+app.get("/results", (req, res) => {
+  res.render("results")
+});
 
 app.get("/resource_new", (req, res) => {
   res.render("resource_new");
 });
 
-app.get("/registration", (req, res) => {
-  res.render("registration");
-});
 
 app.get("/resource", (req, res) => {
   res.render("resource");
