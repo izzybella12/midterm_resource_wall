@@ -13,25 +13,46 @@
     <!-- Javascript -->
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
+
     <!-- Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+    <script>
+      $(function() {
+        const $pin_button = $('#pin');
+        $pin_button.on('click', function() {
+          console.log("The pin button has been clicked!");
+          $('#pin').css("color", "#734303");
+        })
+      })
+
+      $(function() {
+        const $heart_button = $('#heart');
+        $heart_button.on('click', function() {
+          console.log("The heart button has been clicked!");
+          $('#heart').css("color", "red");
+        })
+      })
+
+    </script>
+
   </head>
 
   <body>
+
     <%- include('partials/navbar_logged_out') %>
     <main>
       <section class="resource_info">
         <h2 class="resource_info_title">How To Make The Best Sushi Ever</h2>
-        <div class="rating_icon">
-          <span class="rating_resource_info">Rating: 4.7</span>
-        </div>
+        <span class="rating_resource_info">Rating: 4.7</span>
         <a href="https://www.gimmesomeoven.com/how-to-make-sushi-at-home/">
           <img class="clickable_image" src="https://www.wikihow.com/images/9/98/Eat-Sushi-Step-16.jpg"></img>
         </a>
         <span class="resource_info_description">This recipe teaches you how to make sushi from start to finish: cooking the rice, slicing the fish, rolling the sushi. Delicious!</span>
         <div class="bookmark_like">
-          <i class="material-icons">bookmark_border</i>
-          <i class="material-icons">favorite_border</i>
+          <i class="material-icons" id="pin">bookmark</i>
+          <i class="material-icons" id="heart">favorite</i>
           <span class="rating_resource_info">Likes: 13</span>
         </div>
       </section>
