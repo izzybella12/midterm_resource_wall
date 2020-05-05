@@ -1,5 +1,6 @@
 const express = require('express');
 const router  = express.Router();
+const moment = require('moment');
 
 module.exports = (db) => {
 
@@ -7,27 +8,35 @@ module.exports = (db) => {
     let queryString = `
       SELECT resources.*, AVG(resource_reviews.rating) AS rating
       FROM resources
-      JOIN resource_reviews ON resource_id = resources.id
-      WHERE resources.category LIKE $1
+      LEFT JOIN resource_reviews ON resource_id = resources.id
+      WHERE category = $1
       GROUP BY resources.id;
       `
     return db
     .query(queryString, [category])
-    .then(res => console.log((res.rows)))
-    // .then(res => res.rows)
-    .catch((err) => console.error(err));
+    .then(res =>  (res.rows))
   }
 
   router.post("/", (req, res) => {
     const category = req.body.categories;
-    console.log("this is the cat", category)
-    getResource(category)
-
-    // .then(res => res.redirect('/:category'))
-    //redirect to that specific category one result
-    // res.redirect('/:category')
+    res.redirect(`/resources/${category}`)
   });
-  //
+
+  router.get("/:category", (req, res) => {
+    let category = req.params.category;
+    getResource(category)
+    .then (resources => {
+      console.log(resources);
+      res.render('results', {resources, category, moment})
+    })
+    .catch((err) => (res.status(500).send(err)));
+  })
+
+
+
+
+
+  // })
   // router.get('/results', (req, res) => {
 
   // })
@@ -35,4 +44,4 @@ module.exports = (db) => {
 
 
   return router;
-};
+}
