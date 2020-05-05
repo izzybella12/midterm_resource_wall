@@ -61,10 +61,11 @@ module.exports = (db) => {
     .catch(e => res.send(e));
   });
 
-  router.get("/:user.username", (res, req) => {
-    console.log('this is the body', req.params)
-    console.log('i am a query', req.query)
-  })
+  // router.post("/:user.username", (res, req) => {
+  //   console.log('this is the body', req.params)
+  //   console.log('i am a query', req.query)
+  // })
+
 
 
 

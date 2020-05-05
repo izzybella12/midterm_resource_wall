@@ -13,15 +13,19 @@ module.exports = (db) => {
       `
     return db
     .query(queryString, [category])
-    .then(res => console.log((res.rows)))
+    .then(res => console.log('this is res:', res.rows))
+    // .then(res => res.rows)
     .catch((err) => console.error(err));
   }
 
   router.post("/", (req, res) => {
     const category = req.body.categories;
-    console.log("this is the cat", category)
-    getResource(category);
-    console.log(getResource(category))
+    // console.log("this is the cat", category)
+    getResource(category)
+
+    // .then(res => res.redirect('/:category'))
+    //redirect to that specific category one result
+    // res.redirect('/:category')
   });
   //
   // router.get('/results', (req, res) => {
