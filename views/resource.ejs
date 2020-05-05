@@ -6,37 +6,59 @@
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/register_new.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/resource.css" type="text/css" />
     <!-- Font  -->
-    <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Montserrat|Quicksand:300,400,500,600,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Quicksand:300,400,500,600,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
     <!-- Javascript -->
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
+    <!-- Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
 
   <body>
-    <!-- <%- include('partials/navbar_logged_out') %> -->
+    <%- include('partials/navbar_logged_out') %>
     <main>
       <section class="resource_info">
-        <span class="resource_info_title"></span>
-        <span class="resource_info_description"></span>
-        <span class="resource_info_website"></span>
-        <span class="resource_info_rating"></span>
-        <span class="resource_info_p"></span>
+        <h2 class="resource_info_title">How To Make The Best Sushi Ever</h2>
+        <div class="rating_icon">
+          <i class="material-icons">bookmark</i>
+          <span class="rating_resource_info">Rating: 4.7</span>
+        </div>
+        <a href="https://www.gimmesomeoven.com/how-to-make-sushi-at-home/">
+          <img class="clickable_image" src="https://www.wikihow.com/images/9/98/Eat-Sushi-Step-16.jpg"></img>
+        </a>
+        <span class="resource_info_description">This recipe teaches you how to make sushi from start to finish: cooking the rice, slicing the fish, rolling the sushi. Delicious!</span>
       </section>
 
-      <section class="resource_info_comments">
+      <div class="comment_sections">
+        <section class="resource_info_comments">
+          <article class="comment">
+            <header>
+              <h2 class="comments_label">Comments</h2>
+              <i class="material-icons">face</i>
+              <span class="profile_username">@izzybella12</span>
+              <span class="profile_comment">I love sushiiiii</span>
+            </header>
+            <span class="tweet-content"></span>
+              <footer class="date-icon">
+            <span class="date"></span>
+            </footer>
+          </article>
+        </section>
 
-      </section>
-
-      <section class="resource_info_write_comment">
-        <form method="POST" action="/resource">
-          <textarea></textarea>
-          <button type="submit">Comment</button>
-          <output>140</output>
-          <span id="error"></span>
-        </form>
-      </section>
+        <section class="resource_info_write_comment">
+          <form method="POST" action="/resource">
+            <h2 class="add_comment">Add A Comment</h2>
+            <div class="textarea_button">
+              <textarea></textarea>
+              <button type="submit">Comment</button>
+              <span id="error"></span>
+            </div>
+          </form>
+        </section>
+      </div>
     </main>
   </body>
 </html>
