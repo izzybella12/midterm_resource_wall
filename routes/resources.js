@@ -8,19 +8,19 @@ module.exports = (db) => {
       SELECT resources.*, AVG(resource_reviews.rating) AS rating
       FROM resources
       JOIN resource_reviews ON resource_id = resources.id
-      WHERE category = $1
+      WHERE resources.category LIKE $1
       GROUP BY resources.id;
       `
     return db
     .query(queryString, [category])
-    .then(res => console.log('this is res:', res.rows))
+    .then(res => console.log((res.rows)))
     // .then(res => res.rows)
     .catch((err) => console.error(err));
   }
 
   router.post("/", (req, res) => {
     const category = req.body.categories;
-    // console.log("this is the cat", category)
+    console.log("this is the cat", category)
     getResource(category)
 
     // .then(res => res.redirect('/:category'))
