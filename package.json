@@ -20,7 +20,11 @@
     "dotenv": "^2.0.0",
     "ejs": "^2.6.2",
     "express": "^4.17.1",
+<<<<<<< HEAD
     "moment": "^2.25.3",
+=======
+    "material-design-icons": "^3.0.1",
+>>>>>>> dc320a6a8bc30dddd13da263bf4f32d6ebcc9981
     "morgan": "^1.9.1",
     "node-sass-middleware": "^0.11.0",
     "pg": "^6.4.2",
