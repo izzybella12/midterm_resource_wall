@@ -1,4 +1,4 @@
-// load .env data into process.env
+ // load .env data into process.env
 require('dotenv').config();
 
 // Web server config
@@ -57,7 +57,7 @@ app.get("/registration", (req, res) => {
 //   res.render("profile");
 // });
 
-app.get("/results", (req, res) => {
+app.get("/:category", (req, res) => {
   res.render("results")
 });
 
@@ -69,19 +69,6 @@ app.get("/resource_new", (req, res) => {
 app.get("/resource", (req, res) => {
   res.render("resource");
 });
-
-app.get("/resource_new", (req, res) => {
-  res.render("resource_new");
-});
-
-app.get("/registration", (req, res) => {
-  res.render("registration");
-});
-
-app.get("/resource", (req, res) => {
-  res.render("resource");
-});
-
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

@@ -11,7 +11,7 @@ INSERT INTO resources(title, description, url, created_at, user_id, keyword, cat
 VALUES ('Easy-to-Sew Pillows', 'Add a splash of colour and pattern to a room by sewing your own pillows!', 'https://www.hgtv.com/design/rooms/living-and-dining-rooms/easy-to-sew-pillows', '2020-01-01 14:59:21', 22, 'sew, crafts, pillows', 'Home Improvement');
 
 INSERT INTO resources(title, description, url, created_at, user_id, keyword, category)
-VALUES ('Learn the basics of typing!', 'A 3 minutes video that would change your life!', 'https://www.youtube.com/watch?v=2S3lhm8LaZo', '2012-02-02 14:59:21', 24, 'typing, computers', 'technology');
+VALUES ('Learn the basics of typing!', 'A 3 minutes video that would change your life!', 'https://www.youtube.com/watch?v=2S3lhm8LaZo', '2012-02-02 14:59:21', 24, 'typing, computers', 'Technology');
 
 INSERT INTO resources(title, description, url, created_at, user_id, keyword, category)
 VALUES ('40 Excel Tutorials', 'From Basic to Mastering Excel, learn everything you need to know about it!', 'https://digital.com/blog/excel-tutorials/', '2015-02-02 14:59:21', 24, 'typing, excel, computers', 'Finance & Business');
@@ -62,7 +62,7 @@ INSERT INTO resources(title, description, url, created_at, user_id, keyword, cat
 VALUES ('The Best DIY Face Scrubs for an At-Home Spa Day', 'Some of the most popular facial scrubs cost a lot of money. This seems ridiculous when you consider they’re made of a few simple ingredients, including things like brown sugar, oil, and essential oils. It’s all stuff you can get for pennies and most of it may already be in your kitchen. So why not make your own?', 'https://www.byrdie.com best-homemade-face-scrubs-10-great-recipes-346788', '2020-03-03 16:59:21', 15, 'scrubs, soap', 'Health & Personal Care');
 
 INSERT INTO resources(title, description, url, created_at, user_id, keyword, category)
-VALUES ('Installing a CPU - How To: Basics', 'It is time to get back to basics. How do I install a CPU?', 'https://www.youtube.com/watch?v=_zojIW-2DD8', '2020-02-05 15:45:26', 4, 'cpu, computers, pc,', 'Technology');
+VALUES ('Installing a CPU - How To: Basics', 'It is time to get back to basics. How do I install a CPU?', 'https://www.youtube.com/watch?v=_zojIW-2DD8', '2020-02-05 15:45:26', 4, 'cpu, computers, pc', 'Technology');
 
 INSERT INTO resources(title, description, url, created_at, user_id, keyword, category)
 VALUES ('Calculus 1 Lecture 1.1: An Introduction to Limits', 'Calculus 1 Lecture 1.1:  An Introduction to Limits', 'https://www.youtube.com/watch?v=54_XRjHhZzI', '2016-05-08 13:33:25', 12, 'calculus, math, limits', 'Education & Communication');
