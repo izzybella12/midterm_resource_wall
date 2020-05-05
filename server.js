@@ -62,6 +62,18 @@ app.get("/resource", (req, res) => {
   res.render("resource");
 });
 
+app.get("/resource_new", (req, res) => {
+  res.render("resource_new");
+});
+
+app.get("/registration", (req, res) => {
+  res.render("registration");
+});
+
+app.get("/resource", (req, res) => {
+  res.render("resource");
+});
+
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

@@ -42,7 +42,11 @@ INSERT INTO users(username, email, password, avatar, full_name)
 VALUES ('Gregj469', 'gregjeffereson@hotmail.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.', 'https://i.imgur.com/lRUnDgU.png', 'Greg Jefferson');
 
 INSERT INTO users(username, email, password, avatar, full_name)
+<<<<<<< HEAD
 VALUES ('Mel859' 'mel163@gmail.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.', 'https://i.imgur.com/73hZDYK.png', 'Melanie Stamos');
+=======
+VALUES ('Mel859', 'mel163@gmail.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.', 'https://i.imgur.com/73hZDYK.png', 'Melanie Stamos');
+>>>>>>> 1888c9a17fe55135c7742a05bf10066d43276d88
 
 INSERT INTO users(username, email, password, avatar, full_name)
 VALUES ('jessieT13', 'jessie13@yahoo.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.', 'https://i.imgur.com/3GvwNBf.png', 'Jessie Trevors');
@@ -81,7 +85,7 @@ INSERT INTO users(username, email, password, avatar, full_name)
 VALUES ('lena', 'lena@hotmail.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.', 'https://i.imgur.com/nlhLi3I.png', 'Lena Yosh');
 
 INSERT INTO users(username, email, password, avatar, full_name)
-VALUES ('mel', 'mel@hotmail.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.', 'https://i.imgur.com/lRUnDgU.png', 'Mel Mc')
+VALUES ('mel', 'mel@hotmail.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.', 'https://i.imgur.com/lRUnDgU.png', 'Mel Mc');
 
 INSERT INTO users(username, email, password, avatar, full_name)
 VALUES ('eman', 'eman@hotmail.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.', 'https://i.imgur.com/DVpDmdR.png', 'Eman Al');
