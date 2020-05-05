@@ -52,6 +52,9 @@ app.get("/", (req, res) => {
 app.get("/:userId" , (req, res) => {
   res.render("profile");
 })
+app.get("/results", (req, res) => {
+  res.render("results")
+})
 
 app.get("/resource_new", (req, res) => {
   res.render("resource_new");
