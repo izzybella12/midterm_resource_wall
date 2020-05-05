@@ -18,6 +18,20 @@ module.exports = (db) => {
     .catch((err) => console.error(err));
   }
 
+
+  router.get("/:id", (req, res) => {
+    let id = req.params.id;
+    getResource(id)
+    .then (resources => {
+      console.log(resources);
+      res.render('results', {resources})
+    })
+    .catch((err) => (res.status(500).send(err)));
+  })
+
+  return router;
+
+
   const addLike = function(resourceID) {
     let queryString =`
     UPDATE resource_reviews
