@@ -7,73 +7,71 @@
 
 const express = require('express');
 const router  = express.Router();
-// const bcrypt = require('bcrypt');
+const { Pool } = require("pg");
+const bcrypt = require('bcrypt');
+const cookieSession = require('cookie-session');
+
+router.use(cookieSession({
+  name: 'session',
+  keys: ['12fasf5ywefgd']
+}));
 
 // login
 // people logging in with email or username?
 
 
 
-
-//Homepage
-router.get('/', (req, res) => {
-//if user decides to login
-
-//if user decides to search something
-
-  res.redirect('resources')
-})
-
-router.post('')
-//Checking to see if the email and password match the database
-const login = function (email, password) {
-  return database.getUserwithEmail(email)
-  .then(user => {
-    if (bcrypt.compareSync(password, user.password)){
-      return user;
-    }
-    return null;
-  })
-}
-
-//login
-router.post('/login', (req, res) => {
-  const {email, password} = req.body;
-  login(email, password)
-  .then(user => {
-    if(!user) {
-      res.send({error: "Please register"});
-      return;
-    }
-    req.session.userId = user.id;
-    res.send({user: {name: user.name, email: user.email, id: user.id}});
-  })
-  .catch(e => res.send(e));
-})
-
-
-// register page
-router.post('/register'), (req, res) => {
-
-}
-
-
 module.exports = (db) => {
+//
 
-  //homepage
-  // login and search
-  router.get("/", (req, res) => {
-    db.query(`SELECT * FROM users;`)
-      .then(data => {
-        const users = data.rows;
-        res.json({ users });
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
+
+  const getUserwithEmail = function(email) {
+    const queryString = 'SELECT * FROM users WHERE email = $1';
+    return db
+    .query(queryString, [email])
+    .then(res => (res.rows[0]))
+    .catch((err) => console.error(err));
+  }
+
+  const authenticateUser =  function(email, password) {
+    return getUserwithEmail(email)
+    .then(user => {
+      if (bcrypt.compareSync(password, user.password)) {
+        return user;
+      }
+      return null;
+    });
+  }
+
+  router.post("/", (req, res) => {
+    const {email, password} = req.body
+    console.log(email);
+    console.log(`password is ${password}`);
+    // res.send('okay!')
+    authenticateUser(email, password)
+    .then(user => {
+      if (!user) {
+        res.send({error: "error"});
+        return;
+      }
+      req.session.userId = user.id;
+      console.log('this is user.username', user.username);
+      res.redirect(`/:user.username`)
+    })
+    .catch(e => res.send(e));
   });
+
+  router.get("/:user.username", (res, req) => {
+    console.log('this is the body', req.params)
+    console.log('i am a query', req.query)
+  })
+
+
+
+
+
+
+
 
 // Results of Searched Learning
   router.get("/results", (req, res) => {
@@ -104,10 +102,10 @@ module.exports = (db) => {
 
 
 //     })
-      const { search } = req.query;
-      // search.length()
-      console.log(search)
-      res.send('Ok')
+      // const { search } = req.query;
+      // // search.length()
+      // console.log(search)
+      // res.send('Ok')
 
 
     // queryString += 1` GROUP BY AVG(resource_reviews.rating) AS rating, COUNT(resource_reviews.likes AS likes
@@ -134,6 +132,3 @@ module.exports = (db) => {
   return router;
 };
 
-
-//profile
-router.get('/profile')

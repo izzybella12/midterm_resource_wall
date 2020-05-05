@@ -6,7 +6,7 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/homepage.css" type="text/css" />
 
     <!-- Font  -->
     <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Quicksand:300,400,500,600,700&display=swap" rel="stylesheet">
@@ -20,10 +20,13 @@
     <%- include('partials/navbar_logged_out') %>
     <main>
       <section class="search_box">
-        <label>What do you want to learn today?</label>
-        <input name="text" placeholder="Type on in"></input>
+        <form method="POST" action="/resources/">
+          <label>What do you want to learn today?</label>
+          <input type="text" name="learn" placeholder="Type on in"></input>
+          <button type="submit">submit</button>
+        </form>
         <div class="search_anchors">
-          <a class="search_anchors" href="/results">Teach Me</a>
+          <!-- <a class="search_anchors" href="/results">Teach Me</a> -->
           <a class="search_anchors" href="/results">Trending</a>
           <a class="search_anchors" href="/results">Surprise Me</a>
         </div>
