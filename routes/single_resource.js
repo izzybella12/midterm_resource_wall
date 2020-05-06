@@ -3,35 +3,29 @@ const router  = express.Router();
 
 module.exports = (db) => {
 
-  const getSingleResource = function(resourceID) {
+  const getSingleResource = function(resourceID, category) {
     let queryString = `
     SELECT resources.*, AVG(resource_reviews.rating) AS rating, COUNT(resource_reviews.liking) AS likes
     FROM resources
-    JOIN resource_reviews ON resource_id = resources.id
-    WHERE resources.category = 'Food'
+    FULL OUTER JOIN resource_reviews ON resource_id = resources.id
+    WHERE resources.id = $1 AND resources.category = $2
     GROUP BY resources.id;
     `
     return db
-    .query(queryString, resourceID)
+    .query(queryString, [resourceID, category])
     .then(res => console.log('this is res:', res.rows))
-    // .then(res => res.rows)
+    .then(res => res.rows)
     .catch((err) => console.error(err));
   }
 
-
-  router.get("/:id", (req, res) => {
+  router.get("/:category/:id", (req, res) => {
     let id = req.params.id;
-<<<<<<< HEAD
-    getResource(id)
-    .then (resources => {
-      console.log(resources);
-      res.render('results', {resources})
-=======
+    console.log(req.params)
+    let category = req.params.category
     getSingleResource(id)
     .then (resources => {
       console.log(resources);
       res.render('resource', {resources})
->>>>>>> draft
     })
     .catch((err) => (res.status(500).send(err)));
   })

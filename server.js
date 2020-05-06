@@ -65,8 +65,7 @@ app.get("/resource_new", (req, res) => {
   res.render("resource_new");
 });
 
-
-app.get("/resource", (req, res) => {
+app.get("/:category/:id", (req, res) => {
   res.render("resource");
 });
 

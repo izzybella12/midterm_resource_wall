@@ -15,38 +15,31 @@ module.exports = (db) => {
     return db
     .query(queryString, [category])
     .then(res =>  (res.rows))
-    
+
   }
 
   router.post("/", (req, res) => {
     const category = req.body.categories;
     res.redirect(`/resources/${category}`)
-    
+
     // .then(resources =>(res.redirect('/:category'))
     //redirect to that specific category one result
     // res.redirect('/:category')
   });
-  
+
   router.get("/:category", (req, res) => {
     let category = req.params.category;
     getResource(category)
     .then (resources => {
-      console.log(resources);
       res.render('results', {resources, category, moment})
     })
     .catch((err) => (res.status(500).send(err)));
   })
 
-    
-
-
-
-  // })
-  // router.get('/results', (req, res) => {
-
-  // })
-
-
+  router.post("/:category/"), (req, res) => {
+    const resource = req.body.resource
+    console.log(resource);
+  }
 
   return router;
 }
