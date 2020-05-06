@@ -9,6 +9,7 @@ const express = require('express');
 const router  = express.Router();
 const { Pool } = require("pg");
 const bcrypt = require('bcrypt');
+const moment = require('moment');
 const cookieSession = require('cookie-session');
 
 router.use(cookieSession({
@@ -84,13 +85,14 @@ module.exports = (db) => {
 
 
 
-  router.post('/', (res, req) => {
-    // const {email, password} = req.body;
-    // console.log(email);
-    // console.log(`password is ${password}`);
-    const username = req.body;
-    console.log('Im the user on register', username)
-    res.send('oK')
+  // router.post('/register', (res, req) => {
+  //   // const {email, password} = req.body;
+  //   // console.log(email);
+  //   // console.log(`password is ${password}`);
+  //   const username = req.body;
+  //   console.log('Im the user on register', username)
+  // })
+   
     // console.log(req.query) 
     // const email = user.email;
     // const username = user.username;
@@ -109,7 +111,7 @@ module.exports = (db) => {
   
     // })
     // .catch(e => res.send(e));
-  })
+  
 
   // router.get('/register', (req, res) => {
   //   res.json
@@ -120,7 +122,7 @@ module.exports = (db) => {
     let username = req.params.username;
     getResourceForUser(username)
     .then(resources => {
-      res.render('profile', {resources, username})
+      res.render('profile', {resources, username, moment})
     })
 
   })

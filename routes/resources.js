@@ -15,11 +15,7 @@ module.exports = (db) => {
       `
     return db
     .query(queryString, [category])
-<<<<<<< HEAD
-    .then(res => (res.rows))
-=======
     .then(res =>  (res.rows))
->>>>>>> 69773ebbbe6d33405d1fa67f480e9bd5be831ca6
   }
 
   router.post("/", (req, res) => {
@@ -27,10 +23,6 @@ module.exports = (db) => {
     res.redirect(`/resources/${category}`)
   });
 
-<<<<<<< HEAD
-  
-=======
->>>>>>> 69773ebbbe6d33405d1fa67f480e9bd5be831ca6
   router.get("/:category", (req, res) => {
     let category = req.params.category;
     getResource(category)
