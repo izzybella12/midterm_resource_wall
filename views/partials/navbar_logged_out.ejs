@@ -1,0 +1,32 @@
+<head>
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/styles/navbar.css" type="text/css" />
+</head>
+
+<header class="navbar_header">
+  <nav class="navbar_features">
+    <a href="/" class="page_title">Learners</a>
+    <div class="login_register">
+      <!-- <form class="input_form" method="POST" action="/users">
+        <input class="login_textbox" placeholder="Email" type="email"></input>
+        <input class="login_textbox" placeholder="Password" type="password"></input>
+        <form class="button_form" method="GET" action="/registration">
+        <div class="button_form">
+        <button type="submit" class="nav_buttons">Login</button>
+        <button type="submit" class="nav_buttons">Register</button>
+        </div>
+
+    </form> -->
+
+      <form class="input_form" method="POST" action="/users/login">
+        <input class="login_textbox" placeholder="Email" name="email" type="email"></input>
+        <input class="login_textbox" placeholder="Password" name="password" type="password"></input>
+        <button type="submit" class="nav_buttons">Login</button>
+      </form>
+      <!-- <button type="submit" class="nav_buttons">Register</button> -->
+
+      <!-- </form> -->
+    </form>
+    </div>
+  </nav>
+</header>
