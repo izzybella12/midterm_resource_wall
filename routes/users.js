@@ -75,46 +75,7 @@ module.exports = (db) => {
     .then (res => (res.rows))
   }
 
-  // const addUser = function (username, email, password) {
-  //   const queryString = `
-  //   INSERT INTO users (username, email, password)
-  //   VALUES ($1, $2, $3) RETURNING *`
-  //   return db
-  //   .query(queryString, [username, email, password])
-  //   .then(res => res.rows[0])
-  // }
 
-
-
-  // router.post('/', (res, req) => {
-  //   // const {email, password} = req.body;
-  //   // console.log(email);
-  //   // console.log(`password is ${password}`);
-  //   const username = req.body;
-  //   console.log('Im the user on register', username)
-    // res.send('oK')
-    // console.log(req.query)
-    // const email = user.email;
-    // const username = user.username;
-    // const password = user.password;
-    // const hashedPassword = bcrypt.hashSync(password, 12);
-
-      // if (!email || !password ||!username) {
-      //   res.statusCode(400).send("Fields cannot be blank!");
-
-      // } else if (getUserwithEmail(email) || getUserWithUsername(username)) {
-      //   res.status(400).send("An account with this email or username already exists!");
-      // } else {
-      //   res.send('your registered!')
-      //   res.redirect("/")
-        //req.session.userId = user.id;
-
-    // })
-    // .catch(e => res.send(e));
-
-  // router.get('/register', (req, res) => {
-  //   res.json
-  // })
 
 
   router.get('/login/:username', (req, res) => {
@@ -125,6 +86,14 @@ module.exports = (db) => {
     })
   });
 
+
+  router.get('/login/:username/edit', (req, res) => {
+    let username = req.params.username;
+    getResourceForUser(username)
+    .then(resources => {
+      res.render('editProfile', {resources, username, moment})
+    })
+  });
 
 
   //logout
