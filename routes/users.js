@@ -9,6 +9,7 @@ const express = require('express');
 const router  = express.Router();
 const { Pool } = require("pg");
 const bcrypt = require('bcrypt');
+const moment = require('moment');
 const cookieSession = require('cookie-session');
 
 router.use(cookieSession({
@@ -94,16 +95,26 @@ module.exports = (db) => {
   //   .then(res => res.rows[0])
   // }
 
+<<<<<<< HEAD
 
 
   // router.post('/', (res, req) => {
+=======
+  // router.post('/register', (res, req) => {
+>>>>>>> bcd08a5207ab658c41826d9e69e79367f2363545
   //   // const {email, password} = req.body;
   //   // console.log(email);
   //   // console.log(`password is ${password}`);
   //   const username = req.body;
   //   console.log('Im the user on register', username)
+<<<<<<< HEAD
     // res.send('oK')
     // console.log(req.query)
+=======
+  // })
+   
+    // console.log(req.query) 
+>>>>>>> bcd08a5207ab658c41826d9e69e79367f2363545
     // const email = user.email;
     // const username = user.username;
     // const password = user.password;
@@ -121,13 +132,26 @@ module.exports = (db) => {
 
     // })
     // .catch(e => res.send(e));
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> bcd08a5207ab658c41826d9e69e79367f2363545
 
   // router.get('/register', (req, res) => {
   //   res.json
   // })
 
 
+<<<<<<< HEAD
+=======
+  router.get('/login/:username', (req, res) => {
+    let username = req.params.username;
+    getResourceForUser(username)
+    .then(resources => {
+      res.render('profile', {resources, username, moment})
+    })
+>>>>>>> bcd08a5207ab658c41826d9e69e79367f2363545
 
 
 
