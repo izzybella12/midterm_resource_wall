@@ -18,7 +18,7 @@
   <body>
     <%- include('partials/navbar_logged_out') %>
     <main class="resource_new">
-      <form method="POST" action="/profile">
+      <form method="POST" action="/resources/new">
         <div class="form_input">
           <h2>Create a new resource</h2>
         <div>
@@ -49,9 +49,9 @@
         <div>
           <input class="new_resource_textbox" type="text" name="keywords" placeholder="Keywords"></input>
         </div>
-        <form method="POST" action="/profile">
+        <!-- <form method="POST" action="/profile"> -->
           <button type="submit">Submit</button>
-        </form>
+        <!-- </form> -->
         </div>
       </form>
     </main>

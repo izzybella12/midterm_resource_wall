@@ -37,35 +37,46 @@ const usersRoutes = require("./routes/users");
 const resourceRoutes = require("./routes/resources");
 const singleResource = require("./routes/single_resource");
 
+const authRoutes = require("./routes/auth");
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/users", usersRoutes(db));
 app.use("/resources", resourceRoutes(db));
 app.use("/single_resource", singleResource(db));
+app.use("/register", authRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
 
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
-app.get("/", (req, res) => {
-  res.render("homepage");
-});
-app.get("/registration", (req, res) => {
-  res.render("registration");
-});
+  app.get("/", (req, res) => {
+    res.render("homepage");
+  });
+  // app.get('/users/', (req, res) => {
+  //   res.render('navbar_logged_out')
+  // });
 
-// app.get("/:username" , (req, res) => {
-//   res.render("profile");
-// });
+  app.get("users/login/:username" , (req, res) => {
+    res.render("profile");
+  });
 
-app.get("/:category", (req, res) => {
-  res.render("results")
-});
+  app.get("/register/", (req, res) => {
+    res.render("registration");
+  });
 
-app.get("/resource_new", (req, res) => {
-  res.render("resource_new");
-});
+ app.get("/resources/:category", (req, res) => {
+   res.render("results")
+  });
+
+  app.get("/resource_new", (req, res) => {
+    res.render("resource_new");
+  });
+
+
+  app.get("/resources/", (req, res) => {
+    res.render("resource");
+  });
 
 ///
 
