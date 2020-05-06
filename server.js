@@ -87,7 +87,6 @@ const getSingleResource = function(resourceID) {
 
 app.get("/category/:id", (req, res) => {
     let id = req.params.id;
-    console.log(id)
     getSingleResource(id)
     .then (singleResource => {
       res.render('resource', {singleResource: singleResource[0]})
