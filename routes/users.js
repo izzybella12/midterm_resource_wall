@@ -46,8 +46,8 @@ module.exports = (db) => {
     });
   }
 
-  router.post("/login", (req, res) => {
-    const {email, password} = req.body
+  router.post('/', (req, res) => {
+    const {email, password} = req.body;
     console.log(email);
     console.log(`password is ${password}`);
     // res.send('okay!')
@@ -59,7 +59,7 @@ module.exports = (db) => {
       }
       req.session.userId = user.id;
       let username = user.username;
-      res.redirect(`/users/login/${username}`)
+      res.redirect(`/users/${username}`)
     })
     .catch(e => res.send(e));
   });
@@ -74,44 +74,43 @@ module.exports = (db) => {
     .query(queryString, [username])
     .then (res => (res.rows))
   }
-  const addUser = function (username, email, password) {
-    const queryString = `
-    INSERT INTO users (username, email, password)
-    VALUES ($1, $2, $3) RETURNING *`
-    return db
-    .query(queryString, [username, email, password])
-    .then(res => res.rows[0])
-  }
+
+  // const addUser = function (username, email, password) {
+  //   const queryString = `
+  //   INSERT INTO users (username, email, password)
+  //   VALUES ($1, $2, $3) RETURNING *`
+  //   return db
+  //   .query(queryString, [username, email, password])
+  //   .then(res => res.rows[0])
+  // }
 
 
 
-  // router.post('/register', (res, req) => {
+  // router.post('/', (res, req) => {
   //   // const {email, password} = req.body;
   //   // console.log(email);
   //   // console.log(`password is ${password}`);
   //   const username = req.body;
   //   console.log('Im the user on register', username)
-  // })
-   
-    // console.log(req.query) 
+    // res.send('oK')
+    // console.log(req.query)
     // const email = user.email;
     // const username = user.username;
     // const password = user.password;
     // const hashedPassword = bcrypt.hashSync(password, 12);
-  
+
       // if (!email || !password ||!username) {
       //   res.statusCode(400).send("Fields cannot be blank!");
-      
+
       // } else if (getUserwithEmail(email) || getUserWithUsername(username)) {
       //   res.status(400).send("An account with this email or username already exists!");
       // } else {
       //   res.send('your registered!')
       //   res.redirect("/")
         //req.session.userId = user.id;
-  
+
     // })
     // .catch(e => res.send(e));
-  
 
   // router.get('/register', (req, res) => {
   //   res.json
@@ -124,8 +123,8 @@ module.exports = (db) => {
     .then(resources => {
       res.render('profile', {resources, username, moment})
     })
+  });
 
-  })
 
 
   //logout

@@ -50,27 +50,32 @@ app.use("/register", authRoutes(db));
   app.get("/", (req, res) => {
     res.render("homepage");
   });
+  // app.get('/users/', (req, res) => {
+  //   res.render('navbar_logged_out')
+  // });
+
+  app.get("/:username" , (req, res) => {
+    res.render("profile");
+  });
 
   app.get("/register/", (req, res) => {
     res.render("registration");
   });
- 
+
  app.get("/resources/:category", (req, res) => {
    res.render("results")
   });
-  
+
   app.get("/resource_new", (req, res) => {
     res.render("resource_new");
   });
-  
-  
+
+
   app.get("/resources/", (req, res) => {
     res.render("resource");
   });
-  
-  app.get("/users/login/:username" , (req, res) => {
-    res.render("profile");
-  });
+
+
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

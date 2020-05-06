@@ -27,12 +27,11 @@ module.exports = (db) => {
     let category = req.params.category;
     getResource(category)
     .then (resources => {
-     
+
       res.render('results', {resources, category, moment})
     })
     .catch((err) => (res.status(500).send(err)));
   })
-
 
 
 
