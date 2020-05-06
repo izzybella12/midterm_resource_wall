@@ -21,6 +21,10 @@
     "ejs": "^2.6.2",
     "express": "^4.17.1",
     "material-design-icons": "^3.0.1",
+<<<<<<< HEAD
+    "moment": "^2.25.3",
+=======
+>>>>>>> 324ed4afca11214058dde83ff44f5de52247be62
     "morgan": "^1.9.1",
     "node-sass-middleware": "^0.11.0",
     "pg": "^6.4.2",
