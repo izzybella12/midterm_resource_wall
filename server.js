@@ -35,11 +35,14 @@ app.use(express.static("public"));
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
 const resourceRoutes = require("./routes/resources");
+const singleResource = require("./routes/single_resource");
+
 const authRoutes = require("./routes/auth");
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/users", usersRoutes(db));
 app.use("/resources", resourceRoutes(db));
+app.use("/single_resource", singleResource(db));
 app.use("/register", authRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
@@ -75,7 +78,35 @@ app.use("/register", authRoutes(db));
     res.render("resource");
   });
 
+///
 
+const getSingleResource = function(resourceID) {
+  let queryString = `
+  SELECT resources.*, AVG(resource_reviews.rating) AS rating, COUNT(resource_reviews.liking) AS likes, resource_reviews.comment AS comments
+  FROM resources
+  FULL OUTER JOIN resource_reviews ON resource_id = resources.id
+  WHERE resources.id = $1
+  GROUP BY resources.id, comments;
+  `
+  return db
+  .query(queryString, [resourceID])
+  .then(res => {
+    return res.rows
+  })
+  .catch((err) => console.error(err));
+}
+
+app.get("/category/:id", (req, res) => {
+    let id = req.params.id;
+    console.log(id)
+    getSingleResource(id)
+    .then (singleResource => {
+      res.render('resource', {singleResource: singleResource[0]})
+    })
+    .catch((err) => (console.log("500")));
+});
+
+///
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

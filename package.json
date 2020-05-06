@@ -20,8 +20,14 @@
     "dotenv": "^2.0.0",
     "ejs": "^2.6.2",
     "express": "^4.17.1",
+<<<<<<< HEAD
+    "jquery": "^3.5.1",
+    "moment": "^2.25.3",
+    "material-design-icons": "^3.0.1",
+=======
     "material-design-icons": "^3.0.1",
     "moment": "^2.25.3",
+>>>>>>> 03bf204da1537c4adfc2f6a9b720f709d76af135
     "morgan": "^1.9.1",
     "node-sass-middleware": "^0.11.0",
     "pg": "^6.4.2",

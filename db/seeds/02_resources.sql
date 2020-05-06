@@ -1,4 +1,7 @@
 INSERT INTO resources(title, description, url, created_at, user_id, keyword, category)
+VALUES ('How To Make The Best Sushi Ever', 'This recipe teaches you how to make sushi from start to finish: cooking the rice, slicing the fish, rolling the sushi. Delicious!', 'https://www.gimmesomeoven.com/how-to-make-sushi-at-home/', '2020-05-05 17:03:21', 20, 'food, sushi, DIY', 'Food');
+
+INSERT INTO resources(title, description, url, created_at, user_id, keyword, category)
 VALUES ('10 car problems you can easily fix yourself', 'Replace Engine Air Filter, Replace your PCV Valve, Gas Lifts, Replace Non-Headlight Bulbs, Replaces That Broken Antenna, How to Touch Up Chipped Auto Paint, Fix That Leaky Sunroof, Fix Small Dents and Door Dings, Fix Tears in Leather and Vinyl, Replace Your Cabin Air Filter', 'https://www.familyhandyman.com/automotive/10-car-problems-you-can-easily-fix-yourself/', '2016-05-04 15:59:21', 20, 'fixing, cars, automobile, headlights, antenna, dents, filter', 'Automotive');
 
 INSERT INTO resources(title, description, url, created_at, user_id, keyword, category)

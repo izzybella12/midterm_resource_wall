@@ -1,68 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Home Page</title>
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/resource.css" type="text/css" />
-    <!-- Font  -->
-    <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Quicksand:300,400,500,600,700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
-    <!-- Javascript -->
-    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/app.js"></script>
-    <!-- Icons -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  </head>
 
-  <body>
-    <%- include('partials/navbar_logged_out') %>
-    <main>
-      <section class="resource_info">
-        <h2 class="resource_info_title">How To Make The Best Sushi Ever</h2>
-        <div class="rating_icon">
-          <span class="rating_resource_info">Rating: 4.7</span>
+<head>
+  <title>Home Page</title>
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/resource.css" type="text/css" />
+  <!-- Font  -->
+  <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Quicksand:300,400,500,600,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+
+  <!-- Javascript -->
+  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+  <script type="text/javascript" src="/scripts/comments.js"></script>
+
+  <!-- Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+  <script>
+    $(function() {
+      const $pin_button = $('#pin');
+      $pin_button.on('click', function() {
+        console.log("The pin button has been clicked!");
+        $('#pin').css("color", "#734303");
+      })
+    })
+
+    $(function() {
+      const $heart_button = $('#heart');
+      $heart_button.on('click', function() {
+        console.log("The heart button has been clicked!");
+        $('#heart').css("color", "red");
+      })
+    })
+  </script>
+
+    <!-- Star Rating Links -->
+    <meta charset="UTF-8">
+    <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
+
+</head>
+
+<body>
+  <%- include('partials/navbar_logged_out') %>
+  <main>
+    <section class="resource_info">
+      <h2 class="resource_info_title"> <%= singleResource.title %> </h2>
+
+      <% if (singleResource.rating !== null) { %>
+        <span class="rating_resource_info">Rating:  <%= singleResource.rating %></span>
+      <% } %>
+
+      <a href="https://www.gimmesomeoven.com/how-to-make-sushi-at-home/">
+        <img class="clickable_image" src="https://www.wikihow.com/images/9/98/Eat-Sushi-Step-16.jpg"></img>
+      </a>
+      <span class="resource_info_description"><%= singleResource.description %></span>
+      <div class="bookmark_like">
+        <i class="material-icons" id="pin">bookmark</i>
+        <i class="material-icons" id="heart">favorite</i>
+        <div class="rate">
+          <input type="radio" id="star5" name="rate" value="5" />
+          <label for="star5" title="text">5 stars</label>
+          <input type="radio" id="star4" name="rate" value="4" />
+          <label for="star4" title="text">4 stars</label>
+          <input type="radio" id="star3" name="rate" value="3" />
+          <label for="star3" title="text">3 stars</label>
+          <input type="radio" id="star2" name="rate" value="2" />
+          <label for="star2" title="text">2 stars</label>
+          <input type="radio" id="star1" name="rate" value="1" />
+          <label for="star1" title="text">1 star</label>
         </div>
-        <a href="https://www.gimmesomeoven.com/how-to-make-sushi-at-home/">
-          <img class="clickable_image" src="https://www.wikihow.com/images/9/98/Eat-Sushi-Step-16.jpg"></img>
-        </a>
-        <span class="resource_info_description">This recipe teaches you how to make sushi from start to finish: cooking the rice, slicing the fish, rolling the sushi. Delicious!</span>
-        <div class="bookmark_like">
-          <i class="material-icons">bookmark_border</i>
-          <i class="material-icons">favorite_border</i>
-          <span class="rating_resource_info">Likes: 13</span>
-        </div>
+        <span class="rating_resource_info">Likes: <%= singleResource.likes %></span>
+      </div>
+    </section>
+
+    <div class="comment_sections">
+      <section class="resource_info_comments">
+        <article class="comment">
+          <header>
+            <h2 class="comments_label">Comments</h2>
+            <div id="comment_container">
+
+            </div>
+          </header>
+          <span class="tweet-content"></span>
+            <footer class="date-icon">
+          <span class="date"></span>
+          </footer>
+        </article>
       </section>
 
-      <div class="comment_sections">
-        <section class="resource_info_comments">
-          <article class="comment">
-            <header>
-              <h2 class="comments_label">Comments</h2>
-              <i class="material-icons">face</i>
-              <span class="profile_username">@izzybella12</span>
-              <span class="profile_comment">I love sushiiiii</span>
-            </header>
-            <span class="tweet-content"></span>
-              <footer class="date-icon">
-            <span class="date"></span>
-            </footer>
-          </article>
-        </section>
-
-        <section class="resource_info_write_comment">
-          <form method="POST" action="/resource">
-            <h2 class="add_comment">Add A Comment</h2>
-            <div class="textarea_button">
-              <textarea></textarea>
-              <button type="submit">Comment</button>
-              <span id="error"></span>
-            </div>
-          </form>
-        </section>
-      </div>
-    </main>
-  </body>
+      <section class="resource_info_write_comment">
+        <form method="POST" action="/category/:id">
+          <h2 class="add_comment">Add A Comment</h2>
+          <div class="textarea_button">
+            <textarea id="comment-content"></textarea>
+            <button type="submit">Comment</button>
+            <span id="error"></span>
+          </div>
+        </form>
+      </section>
+    </div>
+  </main>
+</body>
 </html>
