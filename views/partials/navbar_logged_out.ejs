@@ -7,14 +7,16 @@
   <nav class="navbar_features">
     <a href="/" class="page_title">Learners</a>
     <div class="login_register">
-      <form class="input_form" method="POST" action="/">
-        <input class="login_textbox" placeholder="Email"></input>
-        <input class="login_textbox" placeholder="Password"></input>
-      </form>
-      <form class="button_form" method="GET" action="/registration">
+      <form class="input_form" method="POST" action="/users/">
+        <input class="login_textbox" placeholder="Email" type="email"></input>
+        <input class="login_textbox" placeholder="Password" type="password"></input>
+      <!-- <form class="button_form" method="GET" action="/registration"> -->
+        <div class="button_form">
         <button type="submit" class="nav_buttons">Login</button>
         <button type="submit" class="nav_buttons">Register</button>
-      </form>
+        </div>
+      <!-- </form> -->
+    </form>
     </div>
   </nav>
 </header>
