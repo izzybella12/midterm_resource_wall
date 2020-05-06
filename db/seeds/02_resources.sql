@@ -41,10 +41,10 @@ INSERT INTO resources(title, description, url, created_at, user_id, keyword, cat
 VALUES ('How to Cut Your Own Hair Short in 9 Steps', 'The following epic guide has already helped thousands learn how to cut your own hair short at home. It is fully illustrated and gives you just the right amount of information to avoid the common pitfalls.', 'https://buzzcutguide.com/how-to-cut-your-own-hair/', '2020-02-05 16:59:21', 5, 'Hair, short hair, hairstyle', 'Health & Personal Care');
 
 INSERT INTO resources(title, description, url, created_at, user_id, keyword, category)
-VALUES ('How to Make Sushi: Easy Step-by-Step Instructions', 'Want to learn how to make easy and delicious sushi at home? This video provides a sushi rice recipe, ideas for fillings, toppings and plating, and tips on how to roll your sushi rolls!', 'https://www.youtube.com/watch?v=9QUpTeTVPJo', '2018-02-05 16:59:21', 7, 'Sushi, cooking', 'Food');
+VALUES ('How to Make Sushi: Easy Step-by-Step Instructions', 'Want to learn how to make easy and delicious sushi at home? This video provides a sushi rice recipe, ideas for fillings, toppings and plating, and tips on how to roll your sushi rolls!', 'https://www.youtube.com/watch?v=9QUpTeTVPJo', '2018-02-05 16:59:21', 7, 'Sushi, cooking', 'Cooking & Baking');
 
 INSERT INTO resources(title, description, url, created_at, user_id, keyword, category)
-VALUES ('Want to Bake Bread at Home? Start with These 7 Beginner Bread Recipes', 'So, I hear you want to bake bread! That’s music to my bread-loving ears and I can’t wait to help you get started. Bread baking isn’t hard per se, but it can be intimidating. We’ve all been there, and I can tell you from experience that it’s easier than it seems. Even if you’ve never opened a package of yeast or taken your KitchenAid’s dough hook out of the box, don’t worry about a thing, you’ve got this.', 'https://www.thekitchn.com/want-to-bake-bread-at-home-start-with-one-of-these-recipes-189535', '2020-04-04 16:59:21', 7, 'cooking, baking', 'Food');
+VALUES ('Want to Bake Bread at Home? Start with These 7 Beginner Bread Recipes', 'So, I hear you want to bake bread! That’s music to my bread-loving ears and I can’t wait to help you get started. Bread baking isn’t hard per se, but it can be intimidating. We’ve all been there, and I can tell you from experience that it’s easier than it seems. Even if you’ve never opened a package of yeast or taken your KitchenAid’s dough hook out of the box, don’t worry about a thing, you’ve got this.', 'https://www.thekitchn.com/want-to-bake-bread-at-home-start-with-one-of-these-recipes-189535', '2020-04-04 16:59:21', 7, 'cooking, baking', 'Cooking & Baking');
 
 INSERT INTO resources(title, description, url, created_at, user_id, keyword, category)
 VALUES ('The 7 Best At-Home Workout Routines: The Ultimate Guide for Training Without a Gym', 'So you want to start working out, but you don’t want to leave the house?', 'https://www.nerdfitness.com/blog/the-7-best-at-home-workout-routines-the-ultimate-guide-for-training-without-a-gym/', '2020-04-04 16:59:21', 7, 'workout, fitness', 'Fitness & Wellness');
@@ -152,16 +152,16 @@ INSERT INTO resources(title, description, url, created_at, user_id, keyword, cat
 VALUES ('How to Read the Works of Aristotle', 'If you have EVER wondered how the heck to approach Aristotle, check out this thread. Good advice? Let me know in the comments', 'https://philosophy.stackexchange.com/questions/18277/what-is-the-best-order-to-read-aristotle-in', '2016-06-07 21:37:50', 24, 'Philosphy, Aristotle, Reading', 'Education & Communication');
 
 INSERT INTO resources(title, description, url, created_at, user_id, keyword, category)
-VALUES ('Best Chocolate Brownies', 'Best brownies you have ever tried guaranteed. Comment below if you think I am wrong!', 'https://www.allrecipes.com/recipe/10549/best-brownies/', '2016-09-13 21:30:17', 18, 'Brownies, Baking', 'Food');
+VALUES ('Best Chocolate Brownies', 'Best brownies you have ever tried guaranteed. Comment below if you think I am wrong!', 'https://www.allrecipes.com/recipe/10549/best-brownies/', '2016-09-13 21:30:17', 18, 'Brownies, Baking', 'Cooking & Baking');
 
 INSERT INTO resources(title, description, url, created_at, user_id, keyword, category)
-VALUES ('Chicken Stir Fry', 'I make this whenever someone comes over. The recipe never fails me', 'https://www.momontimeout.com/easy-chicken-stir-fry-recipe/', '2016-10-11 22:15:29', 6, 'Stir-fry', 'Food');
+VALUES ('Chicken Stir Fry', 'I make this whenever someone comes over. The recipe never fails me', 'https://www.momontimeout.com/easy-chicken-stir-fry-recipe/', '2016-10-11 22:15:29', 6, 'Stir-fry', 'Cooking & Baking');
 
 INSERT INTO resources(title, description, url, created_at, user_id, keyword, category)
 VALUES ('How to Meditate for Beginners', 'Great video on how meditation is not that hard. Check it out!', 'https://www.youtube.com/watch?v=thcEuMDWxoI', '2018-04-15 13:20:08', 13, 'Meditation, Stress, Anxiety, Relaxation', 'Fitness & Wellness');
 
 INSERT INTO resources(title, description, url, created_at, user_id, keyword, category)
-VALUES ('How to Solve a Rubik\’s cube', 'This video will teach you how to solve a rubik’s cube in no time at all. Seriously. Watch this and go impress your friends', 'https://www.youtube.com/watch?v=KGvQRaK1mvs', '2020-03-14 10:20:00', 19, 'Rubik’s Cube', 'Hobbies & Crafts');
+VALUES ('How to Solve a Rubik’s cube', 'This video will teach you how to solve a rubik’s cube in no time at all. Seriously. Watch this and go impress your friends', 'https://www.youtube.com/watch?v=KGvQRaK1mvs', '2020-03-14 10:20:00', 19, 'Rubik’s Cube', 'Hobbies & Crafts');
 
 INSERT INTO resources(title, description, url, created_at, user_id, keyword, category)
 VALUES ('How to Play Poker', 'Here’s a beginner guide on how to play poker.', 'https://www.youtube.com/watch?v=NlFguTSypBQ', '2016-02-01 11:40:29', 22, 'Poker', 'Hobbies & Crafts');

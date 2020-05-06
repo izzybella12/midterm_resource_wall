@@ -6,11 +6,18 @@
   <title>profile</title>
 </head>
 <body>
+   <!-- <%= JSON.stringify(resources)%> -->
   <h1>User has been signed in</h1>
-  <form method="POST" action="/users/:user.username">
-    <input type="text" name= "text">
-    <input type="password" name="password">
-    <button type ="submit">ENTER ME</button>
-  </form>
+
+  <div>
+    <% for (let resource of resources) { %>
+    <div>
+      <p>title: <%= resource.title %></p>
+      <p>description: <%= resource.description %></p>
+      <p>category: <%= resource.category %></p>
+      <p>created: </p>
+      <% } %>
+    </div>
+  </div>
 </body>
 </html>
