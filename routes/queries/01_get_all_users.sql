@@ -13,6 +13,7 @@ HAVING resource_reviews.rating > 4
 ;
 
 -- get all pins
+<<<<<<< HEAD
 SELECT resources.*,
 
 SELECT resources.*, AVG(resource_reviews.rating) AS rating
@@ -20,3 +21,6 @@ SELECT resources.*, AVG(resource_reviews.rating) AS rating
  LEFT JOIN resource_reviews ON resource_id = resources.id
  WHERE category = 'Technology';
  GROUP BY resources.id
+=======
+SELECT resources.*
+>>>>>>> draft

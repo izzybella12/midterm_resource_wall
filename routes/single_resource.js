@@ -8,7 +8,7 @@ module.exports = (db) => {
     SELECT resources.*, AVG(resource_reviews.rating) AS rating, COUNT(resource_reviews.liking) AS likes
     FROM resources
     JOIN resource_reviews ON resource_id = resources.id
-    WHERE id = $1
+    WHERE resources.category = 'Food'
     GROUP BY resources.id;
     `
     return db
@@ -21,10 +21,17 @@ module.exports = (db) => {
 
   router.get("/:id", (req, res) => {
     let id = req.params.id;
+<<<<<<< HEAD
     getResource(id)
     .then (resources => {
       console.log(resources);
       res.render('results', {resources})
+=======
+    getSingleResource(id)
+    .then (resources => {
+      console.log(resources);
+      res.render('resource', {resources})
+>>>>>>> draft
     })
     .catch((err) => (res.status(500).send(err)));
   })
