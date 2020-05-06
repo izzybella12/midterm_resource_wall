@@ -54,7 +54,7 @@ app.use("/register", authRoutes(db));
   //   res.render('navbar_logged_out')
   // });
 
-  app.get("/:username" , (req, res) => {
+  app.get("users/login/:username" , (req, res) => {
     res.render("profile");
   });
 

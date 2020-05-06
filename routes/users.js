@@ -46,7 +46,7 @@ module.exports = (db) => {
     });
   }
 
-  router.post('/', (req, res) => {
+  router.post('/login', (req, res) => {
     const {email, password} = req.body;
     console.log(email);
     console.log(`password is ${password}`);
@@ -59,7 +59,7 @@ module.exports = (db) => {
       }
       req.session.userId = user.id;
       let username = user.username;
-      res.redirect(`/users/${username}`)
+      res.redirect(`/users/login/${username}`)
     })
     .catch(e => res.send(e));
   });
