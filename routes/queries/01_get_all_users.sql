@@ -16,6 +16,7 @@ HAVING resource_reviews.rating > 4
 <<<<<<< HEAD
 SELECT resources.*,
 
+<<<<<<< HEAD
 SELECT resources.*, AVG(resource_reviews.rating) AS rating
  FROM resources
  LEFT JOIN resource_reviews ON resource_id = resources.id
@@ -24,3 +25,5 @@ SELECT resources.*, AVG(resource_reviews.rating) AS rating
 =======
 SELECT resources.*
 >>>>>>> draft
+=======
+>>>>>>> 03bf204da1537c4adfc2f6a9b720f709d76af135

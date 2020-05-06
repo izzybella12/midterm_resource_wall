@@ -9,6 +9,7 @@ const express = require('express');
 const router  = express.Router();
 const { Pool } = require("pg");
 const bcrypt = require('bcrypt');
+const moment = require('moment');
 const cookieSession = require('cookie-session');
 
 router.use(cookieSession({
@@ -16,13 +17,9 @@ router.use(cookieSession({
   keys: ['12fasf5ywefgd']
 }));
 
-// login
-// people logging in with email or username?
-
 
 
 module.exports = (db) => {
-//
 
 
   const getUserwithEmail = function(email) {
@@ -30,7 +27,13 @@ module.exports = (db) => {
     return db
     .query(queryString, [email])
     .then(res => (res.rows[0]))
-    .catch((err) => console.error(err));
+  }
+
+  const getUserWithUsername = function(username) {
+    const queryString = `SELECT * FROM users WHERE username = $1`;
+    return db
+    .query(queryString, [username])
+    .then(res => (res.rows[0]))
   }
 
   const authenticateUser =  function(email, password) {
@@ -43,8 +46,8 @@ module.exports = (db) => {
     });
   }
 
-  router.post("/", (req, res) => {
-    const {email, password} = req.body
+  router.post('/login', (req, res) => {
+    const {email, password} = req.body;
     console.log(email);
     console.log(`password is ${password}`);
     // res.send('okay!')
@@ -55,69 +58,72 @@ module.exports = (db) => {
         return;
       }
       req.session.userId = user.id;
-      console.log('this is user.username', user.username);
-      res.redirect(`/:user.username`)
+      let username = user.username;
+      res.redirect(`/users/login/${username}`)
     })
     .catch(e => res.send(e));
   });
 
-  // router.post("/:user.username", (res, req) => {
-  //   console.log('this is the body', req.params)
-  //   console.log('i am a query', req.query)
+  const getResourceForUser = function (username) {
+    let queryString =`
+    SELECT resources.*
+    FROM resources
+    JOIN users ON user_id = users.id
+    WHERE users.username = $1;`
+    return db
+    .query(queryString, [username])
+    .then (res => (res.rows))
+  }
+
+  // const addUser = function (username, email, password) {
+  //   const queryString = `
+  //   INSERT INTO users (username, email, password)
+  //   VALUES ($1, $2, $3) RETURNING *`
+  //   return db
+  //   .query(queryString, [username, email, password])
+  //   .then(res => res.rows[0])
+  // }
+
+
+
+  // router.post('/', (res, req) => {
+  //   // const {email, password} = req.body;
+  //   // console.log(email);
+  //   // console.log(`password is ${password}`);
+  //   const username = req.body;
+  //   console.log('Im the user on register', username)
+    // res.send('oK')
+    // console.log(req.query)
+    // const email = user.email;
+    // const username = user.username;
+    // const password = user.password;
+    // const hashedPassword = bcrypt.hashSync(password, 12);
+
+      // if (!email || !password ||!username) {
+      //   res.statusCode(400).send("Fields cannot be blank!");
+
+      // } else if (getUserwithEmail(email) || getUserWithUsername(username)) {
+      //   res.status(400).send("An account with this email or username already exists!");
+      // } else {
+      //   res.send('your registered!')
+      //   res.redirect("/")
+        //req.session.userId = user.id;
+
+    // })
+    // .catch(e => res.send(e));
+
+  // router.get('/register', (req, res) => {
+  //   res.json
   // })
 
 
-
-
-
-
-
-
-
-// Results of Searched Learning
-  router.get("/results", (req, res) => {
-    // const { userId } = req.session;
-    // if user is signed in, they can look at hte specific resource
-    // if (!userId) {
-    //   res.error("Please sign in!")
-    //   return
-    // }
-    // look up the category and keywords to find whatever is searched
-    // do we want to show how many people pinned it?
-    //how to serach via keywords
-
-    let queryString = `
-    SELECT resources.*, AVG(resource_reviews.rating) AS rating, COUNT(resource_reviews.likes) AS likes
-    FROM resources
-    JOIN resource_reviews ON resource_id = resources.id
-    WHERE resources.category LIKE '%$1%' OR resources.keywords LIKE ''
-    `
-
-//     db.query(queryString, [resources.category] => {
-//       if (resources.category.split(' ').length > 1) {
-// // fix a tire
-
-//       } else {
-//         resource
-//       }
-
-
-//     })
-      // const { search } = req.query;
-      // // search.length()
-      // console.log(search)
-      // res.send('Ok')
-
-
-    // queryString += 1` GROUP BY AVG(resource_reviews.rating) AS rating, COUNT(resource_reviews.likes AS likes
-    //   HAVING resource_reviews.likes = true
-    //   ORDER BY`
-
-    // "/results/:resourceId"
+  router.get('/login/:username', (req, res) => {
+    let username = req.params.username;
+    getResourceForUser(username)
+    .then(resources => {
+      res.render('profile', {resources, username, moment})
+    })
   });
-
-
-// "/results/:resourceId"
 
 
 
