@@ -15,8 +15,3 @@ HAVING resource_reviews.rating > 4
 -- get all pins
 SELECT resources.*,
 
-SELECT resources.*, AVG(resource_reviews.rating) AS rating
- FROM resources
- LEFT JOIN resource_reviews ON resource_id = resources.id
- WHERE category = 'Technology';
- GROUP BY resources.id

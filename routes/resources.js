@@ -10,12 +10,12 @@ module.exports = (db) => {
       FROM resources
       LEFT JOIN resource_reviews ON resource_id = resources.id
       WHERE category = $1
-      GROUP BY resources.id;
+      GROUP BY resources.id
+      ORDER BY created_at DESC;
       `
     return db
     .query(queryString, [category])
-    .then(res =>  (res.rows))
-    
+    .then(res => (res.rows))
   }
 
   router.post("/", (req, res) => {
@@ -26,12 +26,13 @@ module.exports = (db) => {
     //redirect to that specific category one result
     // res.redirect('/:category')
   });
+
   
   router.get("/:category", (req, res) => {
     let category = req.params.category;
     getResource(category)
     .then (resources => {
-      console.log(resources);
+     
       res.render('results', {resources, category, moment})
     })
     .catch((err) => (res.status(500).send(err)));
