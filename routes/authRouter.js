@@ -37,13 +37,13 @@ module.exports = (db) => {
     });
   }
 
-  router.get("/register", (req, res) => {
+  router.get("register", (req, res) => {
     let user = req.session.userId;
     res.render("registration", {user});
   });
 
 // ---- User to sign in---
-  router.post('/login', (req, res) => {
+  router.post('login', (req, res) => {
     const {email, password} = req.body;
     console.log(email);
 
