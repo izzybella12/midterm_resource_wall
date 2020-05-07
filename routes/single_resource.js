@@ -33,31 +33,6 @@ module.exports = (db) => {
 
   return router;
 
-
-  const addLike = function(resourceID) {
-    let queryString =`
-    UPDATE resource_reviews
-    SET liking = TRUE
-    WHERE id = $1
-    `
-  }
-
-  const addComment = function(comment, resourceID) {
-    let queryString = `
-    UPDATE resource_reviews
-    SET comment = $1
-    WHERE id = $2
-    `
-  }
-
-  const addRating = function(rating, resourceID) {
-    let queryString = `
-    UPDATE resource_reviews
-    SET rating = $1
-    WHERE id = $2
-    `
-  }
-
 }
 
 //

@@ -1,26 +1,20 @@
 const express = require('express');
 const router  = express.Router();
-const bcrypt = require('bcrypt');
-const cookieSession = require('cookie-session');
 
-router.use(cookieSession({
-name: 'session',  keys: ['12fasf5ywefgd']
-}));
-
-module.exports =(db) => {
+module.exports = (db) => {
 
   const getUserwithEmail = function(email) {
-      const queryString = 'SELECT * FROM users WHERE email = $1';
-      return db
-      .query(queryString, [email])
-      // .then(res => (console.log('brooooo', res.rows[0])))
-    }
+    const queryString = 'SELECT * FROM users WHERE email = $1';
+    return db
+    .query(queryString, [email])
+    .then(res => (res.rows[0]))
+  }
 
   const getUserWithUsername = function(username) {
     const queryString = `SELECT * FROM users WHERE username = $1`;
     return db
     .query(queryString, [username])
-    // .then(res => (console.log('beep', res.rows[0])))
+    .then(res => (res.rows[0]))
   }
 
   const addUser = function (username, email, password, name, avatar) {
@@ -31,9 +25,46 @@ module.exports =(db) => {
     return db
       .query(queryString, [username, email, password, name, avatar])
       .then(res => (res.rows[0]))
-}
+  }
 
-router.post('/', (req, res) => {
+  const authenticateUser =  function(email, password) {
+    return getUserwithEmail(email)
+    .then(user => {
+      if (bcrypt.compareSync(password, user.password)) {
+        return user;
+      }
+      return null;
+    });
+  }
+
+
+  router.get("register", (req, res) => {
+    res.render("registration");
+  });
+
+
+  router.post('login', (req, res) => {
+    const {email, password} = req.body
+    authenticateUser(email, password)
+    .then(user => {
+      if (!user) {
+        res.send({error: "error"});
+        return;
+      }
+      req.session.userId = user.id;
+      let username = user.username;
+      res.redirect(`/users/${username}`)
+    })
+    .catch(e => res.send(e));
+  });
+
+  //logout
+  router.post('logout', (req, res) => {
+    req.session = null;
+    res.redirect('/')
+  });
+
+  router.post('register', (req, res) => {
     const user = req.body;
     const name = user.fullname;
     const email = user.email;
@@ -45,19 +76,20 @@ router.post('/', (req, res) => {
     if (!email || !password ||!username) {
       res.status(400).send("Fields cannot be blank!");
     }
+
     Promise
       .all([getUserwithEmail(email), getUserWithUsername(username)])
       .then(([resultByEmail, resultByUsername]) => {
-        if(resultByEmail.rowCount || resultByUsername.rowCount){
+        if(resultByEmail || resultByUsername){
           res.status(400).send("An account with this email or username already exists!");
         } else {
           addUser(username, email, hashedPassword, name, avatar).then(user => {
             req.session.userId = user.id;
-            res.redirect(`/users/login/${username}`)
+            res.redirect(`/users/${username}`)
           })
         }
       })
-});
-    return router
-};
+})
 
+return router
+}
