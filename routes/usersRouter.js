@@ -29,62 +29,72 @@ module.exports = (db) => {
     .then (res => (res.rows))
   }
 
-  // const addUser = function (username, email, password) {
-  //   const queryString = `
-  //   INSERT INTO users (username, email, password)
-  //   VALUES ($1, $2, $3) RETURNING *`
-  //   return db
-  //   .query(queryString, [username, email, password])
-  //   .then(res => res.rows[0])
-  // }
-
-
-
-  // router.post('/', (res, req) => {
-  //   // const {email, password} = req.body;
-  //   // console.log(email);
-  //   // console.log(`password is ${password}`);
-  //   const username = req.body;
-  //   console.log('Im the user on register', username)
-    // res.send('oK')
-    // console.log(req.query)
-    // const email = user.email;
-    // const username = user.username;
-    // const password = user.password;
-    // const hashedPassword = bcrypt.hashSync(password, 12);
-
-      // if (!email || !password ||!username) {
-      //   res.statusCode(400).send("Fields cannot be blank!");
-
-      // } else if (getUserwithEmail(email) || getUserWithUsername(username)) {
-      //   res.status(400).send("An account with this email or username already exists!");
-      // } else {
-      //   res.send('your registered!')
-      //   res.redirect("/")
-        //req.session.userId = user.id;
-
-    // })
-    // .catch(e => res.send(e));
-
-  // router.get('/register', (req, res) => {
-  //   res.json
-  // })
-
-
-  router.get('/:username', (req, res) => {
+  router.get('/login/:username', (req, res) => {
     let username = req.params.username;
+    let user = req.session.userId;
+
     getResourceForUser(username)
     .then(resources => {
-      res.render('profile', {resources, username, moment})
+      res.render('profile', {resources, username, moment, user})
     })
   });
 
+  // const getUserwith = function(email) {
+  //   const queryString = 'SELECT * FROM users WHERE email = $1';
+  //   return db
+  //   .query(queryString, [email])
+  //   .then(res => (res.rows[0]))
+  // }
 
+  const updateUserProfile = function(username, fullName, email, password, id) {
+    queryString = `
+    UPDATE users
+    SET username = $1, full_name = $2, email = $3, password= $4
+    WHERE id = $5
+    `
+    return db
+    .query(queryString, [username, fullName, email, password, id])
+  };
 
+  router.post('/login/:username/edit', (req, res) => {
+    const user = req.body;
+    const name = user.fullName;
+    const new_username = user.username;
+    const password = bcrypt.hashSync(user.password, 12);
+    const email = user.email
+    const userId = req.session.userId
+    if (!userId) {
+      res.send("sorry not your user!")
+    }
+    updateUserProfile(new_username, name, email, password, userId)
+    .then(user => {
+      let username = new_username;
+      res.redirect(`/users/login/${username}`)
+    })
+  })
 
+  const getUserInfo = (username) => {
+    const queryString = `
+    SELECT *
+    FROM USERS
+    WHERE username = $1`
 
+    return db
+    .query(queryString, [username])
+    .then(res => res.rows[0])
+  }
 
-
+  router.get('/login/:username/edit', (req, res) => {
+    let username = req.params.username;
+    const userId = req.session.userId
+    if (!userId) {
+      res.send('sorry you dont have access')
+    }
+    getUserInfo(username)
+    .then(user => {
+      res.render('editProfile', {user, username})
+    })
+  });
 
   return router;
 };

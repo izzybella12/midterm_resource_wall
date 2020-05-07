@@ -5,28 +5,22 @@
 
 <header class="navbar_header">
   <nav class="navbar_features">
-    <a href="/" class="page_title">Learners</a>
-    <div class="login_register">
-      <!-- <form class="input_form" method="POST" action="/users">
-        <input class="login_textbox" placeholder="Email" type="email"></input>
-        <input class="login_textbox" placeholder="Password" type="password"></input>
-        <form class="button_form" method="GET" action="/registration">
-        <div class="button_form">
-        <button type="submit" class="nav_buttons">Login</button>
-        <button type="submit" class="nav_buttons">Register</button>
-        </div>
-
-    </form> -->
-
-      <form class="input_form" method="POST" action="/users/login">
-        <input class="login_textbox" placeholder="Email" name="email" type="email"></input>
-        <input class="login_textbox" placeholder="Password" name="password" type="password"></input>
-        <button type="submit" class="nav_buttons">Login</button>
+    <a href="http://localhost:3001/" class="page_title">Learners</a>
+    <a href="http://localhost:3001/create" class="page_title">Create New Resource</a>
+    <% if(user){ %>
+      <form method ='POST' action= "/users/logout">
+        <button type="submit">logout</button>
       </form>
-      <button type="submit" class="nav_buttons">Register</button>
+    <% } else if(!user) { %>
+      <div class="login_register">
+        <form class="input_form" method="POST" action="/users/login">
+          <input class="login_textbox" placeholder="Email" name="email" type="email" required>
+          <input class="login_textbox" placeholder="Password" name="password" type="password" required>
+          <button type="submit" class="nav_buttons">Login</button>
+          <a href="http://localhost:3001/register/" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Register</a>
+        </form>
+     <% } %>
 
-      <!-- </form> -->
-    </form>
     </div>
   </nav>
 </header>

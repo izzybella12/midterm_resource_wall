@@ -9,6 +9,12 @@ const bodyParser = require("body-parser");
 const sass       = require("node-sass-middleware");
 const app        = express();
 const morgan     = require('morgan');
+const cookieSession = require('cookie-session');
+
+app.use(cookieSession({
+  name: 'session',
+  keys: ['12fasf5ywefgd']
+}));
 
 // PG database client/connection setup
 const { Pool } = require('pg');
@@ -41,7 +47,6 @@ app.use(express.static("public"));
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/usersRouter");
 const resourceRoutes = require("./routes/resourcesRouter");
-
 const authRoutes = require("./routes/authRouter");
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -53,8 +58,6 @@ app.use("/", authRoutes(db));
 app.get("/", (req, res) => {
   res.render("homepage");
 });
-
-
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

@@ -18,36 +18,40 @@
   <body>
     <%- include('partials/navbar_logged_out') %>
     <main class="resource_new">
-      <form method="POST" action="/resources/new">
+      <form method="POST" action="/create/">
         <div class="form_input">
           <h2>Create a new resource</h2>
         <div>
-          <input class="new_resource_textbox" type="text" name="title" placeholder="Title"></input>
+          <label for="title"> Title:</label>
+          <input class="new_resource_textbox" type="text" name="title" required placeholder="Title"></input>
         </div>
         <div>
-          <textarea class="new_resource_textbox" type="text" name="description" placeholder="Description"></textarea>
+          <label for="description"> Description:</label>
+          <textarea class="new_resource_textbox" type="text" name="description" required placeholder="Description"></textarea>
         </div>
         <div>
-          <input class="new_resource_textbox" type="text" name="link" placeholder="Link"></input>
+          <label for="Website"> Website Link:</label>
+          <input class="new_resource_textbox" type="text" name="url" required placeholder="Link"></input>
         </div>
         <div>
+          <label for="Category"> Category:</label>
           <select class="new_resource_textbox" name="category" required>
-            <option value="" selected>Select a Category</option>
-            <option>Automotive</option>
-            <option>Education & Communication</option>
-            <option>Finance & Business</option>
-            <option>Fitness & Wellness</option>
-            <option>Food</option>
-            <option>Health & Personal Care</option>
-            <option>Hobbies & Crafts</option>
-            <option>Home Improvement</option>
-            <option>Lifestyle</option>
-            <option>Pets & Animals</option>
-            <option>Technology</option>
+            <option value="Category">Category</option>
+            <option value="Automotive">Automotive</options>
+            <option value ="Health & Personal Care">Health & Personal Care</option>
+            <option value="Hobbies & Crafts">Hobbies & Crafts</options>
+            <option value ="Technology">Technology</option>
+            <option value="Home Improvement">Home Improvement</option>
+            <option value="Cooking & Baking">Cooking & Baking</option>
+            <option value="Lifestyle">Lifestyle</option>
+            <option value="Fitness & Wellness">Fitness & Wellness</option>
+            <option value="Finance & Business">Finance & Business</option>
+            <option value ="Education & Communication">Education & Communication</option>
           </select>
         </div>
         <div>
-          <input class="new_resource_textbox" type="text" name="keywords" placeholder="Keywords"></input>
+          <label for="keyword"> Keywords:</label>
+          <input class="new_resource_textbox" type="text" name="keywords" required placeholder="Keywords"></input>
         </div>
         <!-- <form method="POST" action="/profile"> -->
           <button type="submit">Submit</button>
