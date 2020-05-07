@@ -39,7 +39,8 @@ module.exports = (db) => {
 
 
   router.get("register", (req, res) => {
-    res.render("registration");
+    let user = req.session.userId;
+    res.render("registration", {user});
   });
 
 
@@ -48,7 +49,7 @@ module.exports = (db) => {
     authenticateUser(email, password)
     .then(user => {
       if (!user) {
-        res.send({error: "error"});
+        res.send("error");
         return;
       }
       req.session.userId = user.id;
