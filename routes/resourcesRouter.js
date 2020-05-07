@@ -98,6 +98,7 @@ module.exports = (db) => {
   return db
   .query(queryString, [title, description, url, category, keyword, userId])
   }
+
   const checkUrl = function(url) {
     const queryString = `
     SELECT *
@@ -106,6 +107,7 @@ module.exports = (db) => {
     return db
     .query(queryString, [url])
   };
+
   const getUsername = function(userId) {
     const queryString = `
     SELECT username
@@ -116,8 +118,6 @@ module.exports = (db) => {
   }
 
   //Routing for cat form to redirect to form
-  // Francis is funnily mystified.
-  // Francis is always judging.
   // router.get("categories/:cateogory_id", (req, res) => {
   //   res.render("category");
   // });??????
@@ -128,27 +128,31 @@ module.exports = (db) => {
   });
 
   router.get("categories/:category_name", (req, res) => {
-   const category = req.params
+   const category = req.params;
+   let user = req.session.userId;
     if (category === 'trending') {
       getResourceTrending(category)
       .then(resources => {
-        res.render('categoryId', {resources, category, moment});
+        res.render('categoryId', {resources, category, moment, user});
       })
-      .catch((err) => (res.status(500).send(err)));
+      .catch((err) => (res.status(404).send(err)));
+    
     } else if (category === 'surprise') {
       getResource(chooseCategory)
       .then(resources => {
-        res.render('categoryId', {resources, category, moment});
+        res.render('categoryId', {resources, category, moment, user});
       })
-      .catch((err) => (res.status(500).send(err)));
+      .catch((err) => (res.status(404).send(err)));
+    
     } else if (!categories.includes(category)) {
-      res.status(500).send(`There is not category named ${category}, please go pick another category! <a href='/'>Back to homepage</a>` );
+      res.status(404).send(`There is not category named ${category}, please go pick another category! <a href='/'>Back to homepage</a>` );
+    
     } else {
       getResource(category)
       .then (resources => {
-        res.render('categordId', {resources, category, moment});
+        res.render('categordId', {resources, category, moment, user});
       })
-      .catch((err) => (res.status(500).send(err)));
+      .catch((err) => (res.status(404).send(err)));
     };
   })
 
@@ -162,7 +166,7 @@ module.exports = (db) => {
     const userId = req.session.userId
 
     if (category === 'Category') {
-      res.status(400).send("Please pick a category!")
+      res.status(404).send("Please pick a category!")
     }
     Promise
     .all([checkUrl(url), getUsername(userId)])
@@ -173,7 +177,7 @@ module.exports = (db) => {
       } else {
         addResource(title, description, url, category, keywords, userId)
         .then(result => {
-          res.redirect(`/users/login/${username}`)
+          res.redirect(`/users/${username}`)
         })
       }
     })
@@ -182,11 +186,13 @@ module.exports = (db) => {
   router.get("/:resource_id", (req, res) => {
       let id = req.params.resource_id;
 
-      Promise.all([getSingleResource(id), allComments(id)])
+      Promise
+      .all([getSingleResource(id), allComments(id)])
       .then(results => {
         const sResource = results[0][0];
         sResource.comments = results[1];
-        res.render('resource', {singleResource: sResource})
+        let user = req.session.userId;
+        res.render('resource', {singleResource: sResource, user});
       })
       .catch((err) => (console.log("500", err.message)));
   });

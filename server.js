@@ -57,7 +57,8 @@ app.use("/", authRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
 app.get("/", (req, res) => {
-  res.render("homepage");
+  let user = req.session.userId;
+  res.render("homepage", {user});
 });
 
 app.listen(PORT, () => {

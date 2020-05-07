@@ -37,35 +37,41 @@ module.exports = (db) => {
     });
   }
 
-
-  router.get("register", (req, res) => {
+  router.get("/register", (req, res) => {
     let user = req.session.userId;
     res.render("registration", {user});
   });
 
+// ---- User to sign in---
+  router.post('/login', (req, res) => {
+    const {email, password} = req.body;
+    console.log(email);
 
-  router.post('login', (req, res) => {
-    const {email, password} = req.body
+    getUserwithEmail(email)
+    .then(user => {
+      if(!user) {
+        res.status(300).redirect('/register');
+      }
+    });
     authenticateUser(email, password)
     .then(user => {
       if (!user) {
-        res.send("error");
-        return;
+        res.status(300).send('An incorrect password was entered!');
       }
       req.session.userId = user.id;
       let username = user.username;
-      res.redirect(`/users/${username}`)
+      res.redirect(`/users/${username}`);
     })
     .catch(e => res.send(e));
   });
 
   //logout
-  router.post('logout', (req, res) => {
+  router.post('/logout', (req, res) => {
     req.session = null;
     res.redirect('/')
   });
 
-  router.post('register', (req, res) => {
+  router.post('/register', (req, res) => {
     const user = req.body;
     const name = user.fullname;
     const email = user.email;
