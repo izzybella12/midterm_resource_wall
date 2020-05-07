@@ -9,7 +9,7 @@ module.exports =(db) => {
       return db
       .query(queryString, [email])
     }
-    
+
   const getUserWithUsername = function(username) {
     const queryString = `SELECT * FROM users WHERE username = $1`;
     return db
@@ -37,9 +37,8 @@ module.exports =(db) => {
     if (!email || !password ||!username) {
       res.status(400).send("Fields cannot be blank!");
     }
-       
     Promise
-      .all([getUserwithEmail(email), getUserWithUsername(username)])   
+      .all([getUserwithEmail(email), getUserWithUsername(username)])
       .then(([resultByEmail, resultByUsername]) => {
         if(resultByEmail.rowCount || resultByUsername.rowCount){
           res.status(400).send("An account with this email or username already exists!");
@@ -50,8 +49,12 @@ module.exports =(db) => {
           })
         }
       })
+<<<<<<< HEAD
   })
 
+=======
+});
+>>>>>>> f2219adf6fd20c855332d455e75a58cfcacf6634
     return router
 };
 
