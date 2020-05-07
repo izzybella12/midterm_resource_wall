@@ -49,12 +49,7 @@ module.exports =(db) => {
           })
         }
       })
-<<<<<<< HEAD
   })
-
-=======
-});
->>>>>>> f2219adf6fd20c855332d455e75a58cfcacf6634
     return router
 };
 
