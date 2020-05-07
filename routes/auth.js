@@ -15,7 +15,7 @@ module.exports =(db) => {
       .query(queryString, [email])
       // .then(res => (console.log('brooooo', res.rows[0])))
     }
-    
+
   const getUserWithUsername = function(username) {
     const queryString = `SELECT * FROM users WHERE username = $1`;
     return db
@@ -45,9 +45,8 @@ router.post('/', (req, res) => {
     if (!email || !password ||!username) {
       res.status(400).send("Fields cannot be blank!");
     }
-       
     Promise
-      .all([getUserwithEmail(email), getUserWithUsername(username)])   
+      .all([getUserwithEmail(email), getUserWithUsername(username)])
       .then(([resultByEmail, resultByUsername]) => {
         if(resultByEmail.rowCount || resultByUsername.rowCount){
           res.status(400).send("An account with this email or username already exists!");
@@ -58,8 +57,7 @@ router.post('/', (req, res) => {
           })
         }
       })
-})
-
+});
     return router
 };
 

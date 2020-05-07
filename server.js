@@ -36,14 +36,16 @@ app.use(express.static("public"));
 const usersRoutes = require("./routes/users");
 const resourceRoutes = require("./routes/resources");
 const singleResource = require("./routes/single_resource");
-
 const authRoutes = require("./routes/auth");
+const createResourceRoute = require("./routes/creating_resources");
+
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/users", usersRoutes(db));
 app.use("/resources", resourceRoutes(db));
-app.use("/single_resource", singleResource(db));
 app.use("/register", authRoutes(db));
+app.use("/single_resource", singleResource(db));
+app.use("/create", createResourceRoute(db));
 // Note: mount other resources here, using the same pattern above
 
 
@@ -69,13 +71,13 @@ app.use("/register", authRoutes(db));
    res.render("results")
   });
 
-  app.get("/resource_new", (req, res) => {
-    res.render("resource_new");
-  });
-
 
   app.get("/resources/", (req, res) => {
     res.render("resource");
+  });
+
+  app.get('/create', (req, res) => {
+    res.render('resource_new')
   });
 
 ///

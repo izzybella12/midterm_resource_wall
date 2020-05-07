@@ -8,5 +8,20 @@
 <body>
   <%- include('partials/navbar_logged_out') %>
   <h1>EDIT PROFILE!!!</h1>
+  <form method="POST" action="/users/login/<%= username %>/edit">
+    <label for="Full Name:">Full Name:</label>
+    <input class="form-control" type="text" name="fullName" value="<%= user.full_name %>">
+    <label for="email">EMAIL:</label>
+    <input class="form-control" type="email" name="email" value="<%= user.email %>">
+    <label for="password">Password:</label>
+    <input class="form-control" type="password" name="password" placeholder="password" value ="<%= user.password %>">
+    <label for="username">username</label>
+    <input class="form-control" type="text" name="username" value="<%= username %>">
+
+    <p>username:</p>
+    <p>email: </p>
+    <p>password:</p>
+    <button type="submit"> Update </button>
+  </form>
 </body>
 </html>

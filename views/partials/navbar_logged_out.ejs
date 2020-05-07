@@ -7,9 +7,9 @@
   <nav class="navbar_features">
     <a href="/" class="page_title">Learners</a>
     <div class="login_register">
-      <!-- <form class="input_form" method="POST" action="/users">
-        <input class="login_textbox" placeholder="Email" type="email"></input>
-        <input class="login_textbox" placeholder="Password" type="password"></input>
+      <!-- <form class="input_form" method="POST" action="/users/login">
+        <input class="login_textbox" placeholder="Email" name='email',  type="email">
+        <input class="login_textbox" placeholder="Password" type="password">
         <form class="button_form" method="GET" action="/registration">
         <div class="button_form">
         <button type="submit" class="nav_buttons">Login</button>
@@ -19,8 +19,8 @@
     </form> -->
 
       <form class="input_form" method="POST" action="/users/login">
-        <input class="login_textbox" placeholder="Email" name="email" type="email"></input>
-        <input class="login_textbox" placeholder="Password" name="password" type="password"></input>
+        <input class="login_textbox" placeholder="Email" name="email" required type="email" >
+        <input class="login_textbox" placeholder="Password" name="password" required type="password" required>
         <button type="submit" class="nav_buttons">Login</button>
       </form>
       <!-- <button type="submit" class="nav_buttons">Register</button> -->

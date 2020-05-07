@@ -29,13 +29,6 @@ module.exports = (db) => {
     .then(res => (res.rows[0]))
   }
 
-  const getUserWithUsername = function(username) {
-    const queryString = `SELECT * FROM users WHERE username = $1`;
-    return db
-    .query(queryString, [username])
-    .then(res => (res.rows[0]))
-  }
-
   const authenticateUser =  function(email, password) {
     return getUserwithEmail(email)
     .then(user => {
@@ -48,8 +41,8 @@ module.exports = (db) => {
 
   router.post('/login', (req, res) => {
     const {email, password} = req.body;
-    console.log(email);
-    console.log(`password is ${password}`);
+    // console.log(email);
+    // console.log(`password is ${password}`);
     // res.send('okay!')
     authenticateUser(email, password)
     .then(user => {
@@ -58,6 +51,7 @@ module.exports = (db) => {
         return;
       }
       req.session.userId = user.id;
+      console.log(req.session.userId)
       let username = user.username;
       res.redirect(`/users/login/${username}`)
     })
@@ -77,7 +71,6 @@ module.exports = (db) => {
 
 
 
-
   router.get('/login/:username', (req, res) => {
     let username = req.params.username;
     getResourceForUser(username)
@@ -86,15 +79,62 @@ module.exports = (db) => {
     })
   });
 
+  // const getUserwith = function(email) {
+  //   const queryString = 'SELECT * FROM users WHERE email = $1';
+  //   return db
+  //   .query(queryString, [email])
+  //   .then(res => (res.rows[0]))
+  // }
+
+  const updateUserProfile = function(username, fullName, email, password, id) {
+    queryString = `
+    UPDATE users
+    SET username = $1, full_name = $2, email = $3, password= $4
+    WHERE id = $5
+    `
+    return db
+    .query(queryString, [username, fullName, email, password, id])
+  };
+
+  router.post('/login/:username/edit', (req, res) => {
+    const user = req.body;
+    const name = user.fullName;
+    const new_username = user.username;
+    const password = bcrypt.hashSync(user.password, 12);
+    const email = user.email
+    const userId = req.session.userId
+    if (!userId) {
+      res.send("sorry not your user!")
+    }
+    updateUserProfile(new_username, name, email, password, userId)
+    .then(user => {
+      let username = new_username;
+      res.redirect(`/users/login/${username}`)
+    })
+  })
+
+  const getUserInfo = (username) => {
+    const queryString = `
+    SELECT *
+    FROM USERS
+    WHERE username = $1`
+
+    return db
+    .query(queryString, [username])
+    .then(res => res.rows[0])
+  }
 
   router.get('/login/:username/edit', (req, res) => {
     let username = req.params.username;
-    getResourceForUser(username)
-    .then(resources => {
-      res.render('editProfile', {resources, username, moment})
+    const userId = req.session.userId
+    if (!userId) {
+      res.send('sorry you dont have access')
+    }
+    getUserInfo(username)
+    .then(user => {
+      res.render('editProfile', {user, username})
     })
   });
-
 
   //logout
   router.post('/logout', (req, res) => {
