@@ -22,7 +22,13 @@ db.connect();
 app.use(morgan('dev'));
 
 app.set("view engine", "ejs");
+
+// This is for regular form submission. Not for JSON.
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// this is required for Ajax request
+app.use(bodyParser.json());
+
 app.use("/styles", sass({
   src: __dirname + "/styles",
   dest: __dirname + "/public/styles",
@@ -33,79 +39,22 @@ app.use(express.static("public"));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
-const usersRoutes = require("./routes/users");
-const resourceRoutes = require("./routes/resources");
-const singleResource = require("./routes/single_resource");
+const usersRoutes = require("./routes/usersRouter");
+const resourceRoutes = require("./routes/resourcesRouter");
 
-const authRoutes = require("./routes/auth");
+const authRoutes = require("./routes/authRouter");
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/users", usersRoutes(db));
 app.use("/resources", resourceRoutes(db));
-app.use("/single_resource", singleResource(db));
-app.use("/register", authRoutes(db));
+app.use("/", authRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
-
-// Home page
-// Warning: avoid creating more routes in this file!
-// Separate them into separate routes files (see above).
-  app.get("/", (req, res) => {
-    res.render("homepage");
-  });
-  // app.get('/users/', (req, res) => {
-  //   res.render('navbar_logged_out')
-  // });
-
-  app.get("users/login/:username" , (req, res) => {
-    res.render("profile");
-  });
-
-  app.get("/register/", (req, res) => {
-    res.render("registration");
-  });
-
- app.get("/resources/:category", (req, res) => {
-   res.render("results")
-  });
-
-  app.get("/resource_new", (req, res) => {
-    res.render("resource_new");
-  });
-
-
-  app.get("/resources/", (req, res) => {
-    res.render("resource");
-  });
-
-///
-
-const getSingleResource = function(resourceID) {
-  let queryString = `
-  SELECT resources.*, AVG(resource_reviews.rating) AS rating, COUNT(resource_reviews.liking) AS likes, resource_reviews.comment AS comments
-  FROM resources
-  FULL OUTER JOIN resource_reviews ON resource_id = resources.id
-  WHERE resources.id = $1
-  GROUP BY resources.id, comments;
-  `
-  return db
-  .query(queryString, [resourceID])
-  .then(res => {
-    return res.rows
-  })
-  .catch((err) => console.error(err));
-}
-
-app.get("/category/:id", (req, res) => {
-    let id = req.params.id;
-    getSingleResource(id)
-    .then (singleResource => {
-      res.render('resource', {singleResource: singleResource[0]})
-    })
-    .catch((err) => (console.log("500")));
+app.get("/", (req, res) => {
+  res.render("homepage");
 });
 
-///
+
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
