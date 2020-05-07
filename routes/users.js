@@ -10,12 +10,7 @@ const router  = express.Router();
 const { Pool } = require("pg");
 const bcrypt = require('bcrypt');
 const moment = require('moment');
-const cookieSession = require('cookie-session');
 
-router.use(cookieSession({
-  name: 'session',
-  keys: ['12fasf5ywefgd']
-}));
 
 
 
@@ -45,21 +40,28 @@ module.exports = (db) => {
       return null;
     });
   }
-
+  
   router.post('/login', (req, res) => {
     const {email, password} = req.body;
     console.log(email);
     console.log(`password is ${password}`);
-    // res.send('okay!')
+    
+    getUserwithEmail(email)
+    .then(user => {
+      if(!user) {
+        res.status(300).redirect('/register/');
+      }
+     });
+
     authenticateUser(email, password)
     .then(user => {
       if (!user) {
-        res.send({error: "error"});
+        res.status(300).send('An incorrect password was entered!');
         return;
       }
       req.session.userId = user.id;
       let username = user.username;
-      res.redirect(`/users/login/${username}`)
+      res.redirect(`/users/login/${username}`);
     })
     .catch(e => res.send(e));
   });
@@ -75,14 +77,13 @@ module.exports = (db) => {
     .then (res => (res.rows))
   }
 
-
-
-
   router.get('/login/:username', (req, res) => {
     let username = req.params.username;
+    const user = req.session.userId
+    
     getResourceForUser(username)
     .then(resources => {
-      res.render('profile', {resources, username, moment})
+      res.render('profile', {resources, username, moment, user})
     })
   });
 
@@ -99,11 +100,8 @@ module.exports = (db) => {
   //logout
   router.post('/logout', (req, res) => {
     req.session = null;
-    res.redirect('/')
+    res.redirect('/');
   });
-
-
-
 
   return router;
 };
