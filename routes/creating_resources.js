@@ -31,7 +31,7 @@ module.exports = (db) => {
     .query(queryString, [userId])
   }
 
-  router.post('/', (req, res) => {
+  router.post('/create', (req, res) => {
     const resource = req.body;
     const title = resource.title;
     const description = resource.description;
