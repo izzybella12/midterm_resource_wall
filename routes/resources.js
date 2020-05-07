@@ -30,9 +30,10 @@ module.exports = (db) => {
 
   router.get("/:category", (req, res) => {
     let category = req.params.category;
+    let user = req.session.userId;
     getResource(category)
     .then (resources => {
-      res.render('results', {resources, category, moment})
+      res.render('results', {resources, category, moment, user})
     })
     .catch((err) => (res.status(500).send(err)));
   })

@@ -36,7 +36,6 @@ module.exports = (db) => {
   
   router.post('/login', (req, res) => {
     const {email, password} = req.body;
-<<<<<<< HEAD
     console.log(email);
     console.log(`password is ${password}`);
     
@@ -47,11 +46,6 @@ module.exports = (db) => {
       }
      });
 
-=======
-    // console.log(email);
-    // console.log(`password is ${password}`);
-    // res.send('okay!')
->>>>>>> f2219adf6fd20c855332d455e75a58cfcacf6634
     authenticateUser(email, password)
     .then(user => {
       if (!user) {
@@ -77,15 +71,10 @@ module.exports = (db) => {
     .then (res => (res.rows))
   }
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> f2219adf6fd20c855332d455e75a58cfcacf6634
   router.get('/login/:username', (req, res) => {
-    let username = req.params.username;
-    const user = req.session.userId
-    
+    let username = req.params.username; 
+    let user = req.session.userId;
+  
     getResourceForUser(username)
     .then(resources => {
       res.render('profile', {resources, username, moment, user})

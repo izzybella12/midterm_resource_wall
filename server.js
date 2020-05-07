@@ -62,12 +62,8 @@ app.use("/create", createResourceRoute(db));
     let templateVars = {
       user: req.session.userId
     };
-    console.log(templateVars);
     res.render("homepage", templateVars);
   });
-  // app.get('/users/', (req, res) => {
-  //   res.render('navbar_logged_out')
-  // });
 
   app.get("users/login/:username" , (req, res) => {
     res.render("profile");
@@ -76,18 +72,24 @@ app.use("/create", createResourceRoute(db));
   app.get("/register/", (req, res) => {
     res.render("registration");
   });
-
+  
  app.get("/resources/:category", (req, res) => {
    res.render("results")
   });
 
 
   app.get("/resources/", (req, res) => {
-    res.render("resource");
+    let templateVars = {
+      user: req.session.userId
+    };
+    res.render("resource", templateVars);
   });
 
   app.get('/create', (req, res) => {
-    res.render('resource_new')
+    let templateVars = {
+      user: req.session.userId
+    };
+    res.render('resource_new', templateVars);
   });
 
 ///
