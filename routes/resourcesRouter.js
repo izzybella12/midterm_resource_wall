@@ -120,15 +120,21 @@ module.exports = (db) => {
   //Routing for cat form to redirect to form
   // router.get("categories/:cateogory_id", (req, res) => {
   //   res.render("category");
-  // });??????
+  // })
 
-  router.post("categories/category_name", (req, res) => {
-    const category = req.body.categories;
-    res.redirect(`/resources/categories/${category}`)
-  });
+  // router.post("/categories/:category", (req, res) => {
+  //   const category = req.body.categories;
+  //   console.log(category)
+  //   res.redirect(`/resources/categories/${category}`)
+  // });
 
-  router.get("categories/:category_name", (req, res) => {
-   const category = req.params;
+   
+
+
+
+  router.get("/categories/:category", (req, res) => {
+   const category = req.params.category;
+   console.log('bboooooo', category)
    let user = req.session.userId;
     if (category === 'trending') {
       getResourceTrending(category)
@@ -150,12 +156,15 @@ module.exports = (db) => {
     } else {
       getResource(category)
       .then (resources => {
-        res.render('categordId', {resources, category, moment, user});
+        res.render('categoryId', {resources, category, moment, user});
       })
       .catch((err) => (res.status(404).send(err)));
     };
   })
 
+  router.get('/create'), (req, res) => {
+    res.render('resource_new');
+  }
   router.post('/create', (req, res) => {
     const resource = req.body;
     const title = resource.title;

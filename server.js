@@ -61,6 +61,12 @@ app.get("/", (req, res) => {
   res.render("homepage", {user});
 });
 
+app.post("/", (req, res) => {
+  const category = req.body.categories;
+  console.log('aAHHHHH', category)
+  res.redirect(`/resources/categories/${category}`)
+});
+
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });

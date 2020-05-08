@@ -1,5 +1,7 @@
 const express = require('express');
 const router  = express.Router();
+const cookieSession = require('cookie-session');
+const bcrypt = require('bcrypt');
 
 module.exports = (db) => {
 
@@ -37,13 +39,13 @@ module.exports = (db) => {
     });
   }
 
-  router.get("register", (req, res) => {
+  router.get("/register", (req, res) => {
     let user = req.session.userId;
     res.render("registration", {user});
   });
 
 // ---- User to sign in---
-  router.post('login', (req, res) => {
+  router.post('/login', (req, res) => {
     const {email, password} = req.body;
     console.log(email);
 
@@ -55,10 +57,12 @@ module.exports = (db) => {
     });
     authenticateUser(email, password)
     .then(user => {
+      console.log('hello!', user)
       if (!user) {
         res.status(300).send('An incorrect password was entered!');
       }
       req.session.userId = user.id;
+      console.log(req.session.userId)
       let username = user.username;
       res.redirect(`/users/${username}`);
     })
