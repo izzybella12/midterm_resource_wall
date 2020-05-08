@@ -58,7 +58,8 @@ app.use("/", authRoutes(db));
 
 app.get("/", (req, res) => {
   let user = req.session.userId;
-  res.render("homepage", {user});
+  let username = req.params.username;
+  res.render("homepage", {user, username});
 });
 
 app.post("/", (req, res) => {

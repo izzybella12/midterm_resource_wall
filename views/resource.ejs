@@ -32,17 +32,20 @@
   <%- include('partials/navbar_logged_out') %>
   <main>
     <section class="resource_info">
-      <h2 class="resource_info_title"> <%= singleResource.title %> </h2>
-      <% if (singleResource.rating !== null) { %>
-        <span class="rating_resource_info">Rating:  <%= Math.floor(singleResource.rating) %></span>
+      <h2 class="resource_info_title"> <%= sResource.title %> </h2>
+
+      <% if (sResource.rating !== null) { %>
+        <span class="rating_resource_info">Rating:  <%= Math.floor(sResource.rating) %></span>
       <% } %>
+
       <% if (singleResource.likes !== '0') { %>
         <span class="rating_resource_info">Likes: <%= singleResource.likes %></span>
       <% } %>
-      <a href= <%= singleResource.url %> >
+
+      <a href= <%= sResource.url %> >
         <img class="clickable_image" src="https://www.wikihow.com/images/9/98/Eat-Sushi-Step-16.jpg"></img>
       </a>
-      <span class="resource_info_description"><%= singleResource.description %></span>
+      <span class="resource_info_description"><%= sResource.description %></span>
       <div class="bookmark_like">
         <!-- <i class="material-icons" id="pin">bookmark</i> -->
         <label>Like This Resource:</label>
@@ -60,6 +63,9 @@
           <input type="radio" class="star5" name="rate" value="1" />
           <label for="star1" title="text" class="star5">5 star</label>
         </div>
+        <% if (sResource.likes !== '0') { %>
+        <span class="rating_resource_info">Likes: <%= sResource.likes %></span>
+        <% } %>
       </div>
     </section>
 
@@ -70,8 +76,8 @@
             <h2 class="comments_label">Comments</h2>
             <div id="comment_container">
             <ul id='comment-list'>
-              <% for (let commentObj of singleResource.comments) { %>
-                <i class="material-icons">face</i> @<%= commentObj.username %> <%= commentObj.comment %>
+              <% for (let comment of comments) { %>
+                <i class="material-icons">face</i> @ <%= comment.username %> <%= comment.comment %>
               <% } %>
               </ul>
             </div>
@@ -88,8 +94,8 @@
           <h2 class="add_comment">Add A Comment</h2>
           <div class="textarea_button">
             <textarea name="commentContent" id="comment-content"></textarea>
-            <input id="resource-id" type="hidden" value="<%= singleResource.id %>" />
-            <input id="resource-username" type="hidden" value="<%= singleResource.username %>" />
+            <input id="resource-id" type="hidden" value="<%= sResource.id %>" />
+            <input id="resource-username" type="hidden" value="<%= username %>" />
             <button type="submit">Comment</button>
             <span id="error"></span>
           </div>

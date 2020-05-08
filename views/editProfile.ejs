@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Leaners | Edit Profile</title>
 </head>
 <body>
   <%- include('partials/navbar_logged_out') %>
@@ -14,13 +14,9 @@
     <label for="email">EMAIL:</label>
     <input class="form-control" type="email" name="email" value="<%= user.email %>">
     <label for="password">Password:</label>
-    <input class="form-control" type="password" name="password" placeholder="password" value ="<%= user.password %>">
+    <input class="form-control" type="password" name="password"  required placeholder="password">
     <label for="username">username</label>
     <input class="form-control" type="text" name="username" value="<%= username %>">
-
-    <p>username:</p>
-    <p>email: </p>
-    <p>password:</p>
     <button type="submit"> Update </button>
   </form>
 </body>
