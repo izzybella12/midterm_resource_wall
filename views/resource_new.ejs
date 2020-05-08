@@ -16,9 +16,12 @@
   </head>
 
   <body>
-    <%- include('partials/navbar_logged_out') %>
+    <div>
+     <%- include('partials/navbar_logged_out') %> 
+    </div>
+  
     <main class="resource_new">
-      <form method="POST" action="/create/">
+      <form method="POST" action="/resources/create">
         <div class="form_input">
           <h2>Create a new resource</h2>
         <div>

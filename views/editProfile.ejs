@@ -8,7 +8,7 @@
 <body>
   <%- include('partials/navbar_logged_out') %>
   <h1>EDIT PROFILE!!!</h1>
-  <form method="POST" action="/users/login/<%= username %>/edit">
+  <form method="POST" action="/users/<%= username %>/edit">
     <label for="Full Name:">Full Name:</label>
     <input class="form-control" type="text" name="fullName" value="<%= user.full_name %>">
     <label for="email">EMAIL:</label>

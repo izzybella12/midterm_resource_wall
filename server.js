@@ -10,6 +10,7 @@ const sass       = require("node-sass-middleware");
 const app        = express();
 const morgan     = require('morgan');
 const cookieSession = require('cookie-session');
+const bcrypt = require('bcrypt');
 
 app.use(cookieSession({
   name: 'session',
@@ -56,7 +57,14 @@ app.use("/", authRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
 app.get("/", (req, res) => {
-  res.render("homepage");
+  let user = req.session.userId;
+  res.render("homepage", {user});
+});
+
+app.post("/", (req, res) => {
+  const category = req.body.categories;
+  console.log('aAHHHHH', category)
+  res.redirect(`/resources/categories/${category}`)
 });
 
 app.listen(PORT, () => {

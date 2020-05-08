@@ -5,19 +5,19 @@
 
 <header class="navbar_header">
   <nav class="navbar_features">
-    <a href="http://localhost:3001/" class="page_title">Learners</a>
-    <a href="http://localhost:3001/create" class="page_title">Create New Resource</a>
+    <a href="/" class="page_title">Learners</a>
+    <a href="/resources/create" class="page_title">Create New Resource</a>
     <% if(user){ %>
-      <form method ='POST' action= "/users/logout">
+      <form method ='POST' action= "/logout">
         <button type="submit">logout</button>
       </form>
     <% } else if(!user) { %>
       <div class="login_register">
-        <form class="input_form" method="POST" action="/users/login">
+        <form class="input_form" method="POST" action="/login">
           <input class="login_textbox" placeholder="Email" name="email" type="email" required>
           <input class="login_textbox" placeholder="Password" name="password" type="password" required>
           <button type="submit" class="nav_buttons">Login</button>
-          <a href="http://localhost:3001/register/" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Register</a>
+          <a href="/register" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Register</a>
         </form>
      <% } %>
 

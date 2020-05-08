@@ -1,10 +1,3 @@
-/*
- * All routes for Users are defined here
- * Since this file is loaded in server.js into api/users,
- *   these routes are mounted onto /users
- * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
- */
-
 const express = require('express');
 const router  = express.Router();
 const { Pool } = require("pg");
@@ -14,10 +7,6 @@ const moment = require('moment');
 
 
 module.exports = (db) => {
-
-
-
-
   const getResourceForUser = function (username) {
     let queryString =`
     SELECT resources.*
@@ -27,12 +16,21 @@ module.exports = (db) => {
     return db
     .query(queryString, [username])
     .then (res => (res.rows))
-  }
+  };
 
-  router.get('/login/:username', (req, res) => {
+  const updateUserProfile = function(username, fullName, email, password, id) {
+    queryString = `
+    UPDATE users
+    SET username = $1, full_name = $2, email = $3, password= $4
+    WHERE id = $5
+    `
+    return db
+    .query(queryString, [username, fullName, email, password, id])
+  };
+
+  router.get('/:username', (req, res) => {
     let username = req.params.username;
     let user = req.session.userId;
-
     getResourceForUser(username)
     .then(resources => {
       res.render('profile', {resources, username, moment, user})
@@ -46,17 +44,9 @@ module.exports = (db) => {
   //   .then(res => (res.rows[0]))
   // }
 
-  const updateUserProfile = function(username, fullName, email, password, id) {
-    queryString = `
-    UPDATE users
-    SET username = $1, full_name = $2, email = $3, password= $4
-    WHERE id = $5
-    `
-    return db
-    .query(queryString, [username, fullName, email, password, id])
-  };
 
-  router.post('/login/:username/edit', (req, res) => {
+
+  router.post('/:username/edit', (req, res) => {
     const user = req.body;
     const name = user.fullName;
     const new_username = user.username;
@@ -84,7 +74,7 @@ module.exports = (db) => {
     .then(res => res.rows[0])
   }
 
-  router.get('/login/:username/edit', (req, res) => {
+  router.get('/:username/edit', (req, res) => {
     let username = req.params.username;
     const userId = req.session.userId
     if (!userId) {
@@ -96,6 +86,43 @@ module.exports = (db) => {
     })
   });
 
+  router.get('/:username/edit', (req, res) => {
+    let username = req.params.username;
+    const userId = req.session.userId
+    if (!userId) {
+      res.send('sorry you dont have access')
+    }
+    getUserInfo(username)
+    .then(user => {
+      res.render('editProfile', {user, username})
+    });
+  });
+  
+  router.get('/:username/edit', (req, res) => {
+    let username = req.params.username;
+    const userId = req.session.userId
+    if (!userId) {
+      res.send('sorry you dont have access')
+    }
+    getUserInfo(username)
+    .then(user => {
+      res.render('editProfile', {user, username})
+    })
+  });
+
+  router.get('/:username/edit', (req, res) => {
+    let username = req.params.username;
+    const userId = req.session.userId
+    if (!userId) {
+      res.send('sorry you dont have access')
+    }
+    getUserInfo(username)
+    .then(user => {
+      res.render('editProfile', {user, username})
+    })
+  })
+  
+  
   return router;
 };
 
