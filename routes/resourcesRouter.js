@@ -23,9 +23,7 @@ module.exports = (db) => {
       .then(res => (res.rows))
   }
 
-  const getSingleResource = function (resourceID) {
-    console.log("getSingleResource Call");
-    // resource_reviews.comment AS comments
+  const getSingleResource = function(resourceID) {
     let queryString = `
     SELECT resources.*, users.username AS username, AVG(resource_reviews.rating) AS rating, COUNT(resource_reviews.liking) AS likes
     FROM resources
@@ -53,29 +51,23 @@ module.exports = (db) => {
 
   const addComment = function (comment, resourceID, userID) {
     let queryString = `
-    UPDATE resource_reviews
-    SET comment = $1
-    WHERE id = $2
-    `
+    INSERT INTO resource_reviews(comment, resource_id, user_id) VALUES($1,$2, $3)`
     return db.query(queryString, [comment, resourceID, userID])
   }
 
   const addRating = function (rating, resource_id, user_id) {
     let queryString = `
-    UPDATE resource_reviews
-    SET rating = $1
-    WHERE id = $2 AND user_id = $3
-    `
+    INSERT INTO resource_reviews(rating, resource_id, user_id) VALUES($1, $2, $3)`
+
     return db.query(queryString, [rating, resource_id, user_id])
   }
 
-  const addLike = function (resource_id, user_id) {
+  const addLike = function(resource_id, user_id) {
+    
     let queryString = `
-      UPDATE resource_reviews
-      SET liking = TRUE
-      WHERE id = $1 AND user_id = $2
-      `
-    return db.query(queryString, [resource_id, user_id])
+    INSERT INTO resource_reviews(liking, resource_id, user_id) VALUES(TRUE, $1, $2)`
+
+      return db.query(queryString, [resource_id, user_id])
   }
 
   const getResourceTrending = () => {
@@ -205,36 +197,36 @@ module.exports = (db) => {
         const sResource = results[0][0];
         sResource.comments = results[1];
         let user = req.session.userId;
-        res.render('resourceId', { singleResource: sResource, user});
+        res.render('resource', { singleResource: sResource, user});
       })
       .catch((err) => (console.log("500", err.message)));
   });
 
-  router.post("/:resource_id/comments/new"), (req, res) => {
+  router.post("/:resource_id/comments/new", (req, res) => {
     const resource_id = req.params.resource_id;
-    const user_id = req.session.user_id;
+    const user_id = req.session.userId;
     const comment = req.body.comment;
 
-    addComment(comment, 1, resource_id)
+    addComment(comment, resource_id, user_id)
       .then(dbRes => res.json("OK"))
-  }
+  });
 
-  router.post("/resources/:resource_id/likes/new"), (req, res) => {
+  router.post("/:resource_id/likes/new", (req, res) => {
     const resource_id = req.params.resource_id;
-    const user_id = req.session.user_id;
+    const user_id = req.session.userId;
 
     addLike(resource_id, user_id)
-      .then(dbRes => res.json("OK"))
-  }
+    .then(dbRes => res.json("OK"))
+  });
 
-  router.post("/resources/:resource_id/ratings/new"), (req, res) => {
-    const rating = req.params.rating;
+  router.post("/:resource_id/ratings/new", (req, res) => {
+    const rating = req.body.rating;
     const resource_id = req.params.resource_id;
-    const user_id = req.session.user_id;
+    const user_id = req.session.userId;
 
     addRating(rating, resource_id, user_id)
-      .then(dbRes => res.json("OK"))
-  }
+    .then(dbRes => res.json("OK"))
+  });
 
   return router;
 }

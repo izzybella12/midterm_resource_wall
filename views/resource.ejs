@@ -35,7 +35,7 @@
       <h2 class="resource_info_title"> <%= singleResource.title %> </h2>
 
       <% if (singleResource.rating !== null) { %>
-        <span class="rating_resource_info">Rating:  <%= singleResource.rating %></span>
+        <span class="rating_resource_info">Rating:  <%= Math.floor(singleResource.rating) %></span>
       <% } %>
 
       <a href= <%= singleResource.url %> >
@@ -43,7 +43,7 @@
       </a>
       <span class="resource_info_description"><%= singleResource.description %></span>
       <div class="bookmark_like">
-        <i class="material-icons" id="pin">bookmark</i>
+        <!-- <i class="material-icons" id="pin">bookmark</i> -->
         <i class="material-icons" id="heart">favorite</i>
         <div class="rate">
           <input type="radio" id="star5" name="rate" value="5" />
@@ -71,7 +71,7 @@
             <div id="comment_container">
             <ul id='comment-list'>
               <% for (let commentObj of singleResource.comments) { %>
-                @<%= commentObj.username %> <%= commentObj.comment %>
+                <i class="material-icons">face</i> @<%= commentObj.username %> <%= commentObj.comment %>
               <% } %>
               </ul>
             </div>
@@ -88,6 +88,8 @@
           <h2 class="add_comment">Add A Comment</h2>
           <div class="textarea_button">
             <textarea name="commentContent" id="comment-content"></textarea>
+            <input id="resource-id" type="hidden" value="<%= singleResource.id %>" />
+            <input id="resource-username" type="hidden" value="<%= singleResource.username %>" />
             <button type="submit">Comment</button>
             <span id="error"></span>
           </div>

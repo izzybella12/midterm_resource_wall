@@ -1,6 +1,9 @@
 $(document).ready(function() {
   console.log("Comment Document Ready")
 
+  const resourceId = $('#resource-id').val()
+  const resourceUsername = $('#resource-username').val()
+
   const createdComments = function(commentData) {
 
     const escape =  function(str) {
@@ -13,7 +16,7 @@ $(document).ready(function() {
     // Connect with login
     const $comment = $(`
     <i class="material-icons">face</i>
-    <span class="profile_username">USER_ID</span>
+    <span class="profile_username">${resourceUsername}</span>
     <span class="profile_comment">${escape(problematicText)}</span>
     `);
     return $comment;
@@ -26,10 +29,9 @@ $(document).ready(function() {
       comment: commentContent
     }
 
-    $.ajax('/resources/:resource_id/comments/new', { method: 'POST', data: commentObj})
+    $.ajax(`/resources/${resourceId}/comments/new`, { method: 'POST', data: commentObj})
       .then(function(response) {
         console.log('Comment successfully added: ', response)
-      .then
         $('#comment-list').append(createdComments(commentObj));
         $('#comment-content').val("");
     });
