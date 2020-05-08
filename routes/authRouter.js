@@ -1,22 +1,18 @@
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 const cookieSession = require('cookie-session');
 const bcrypt = require('bcrypt');
 
 module.exports = (db) => {
-
-  const getUserwithEmail = function(email) {
-    const queryString = 'SELECT * FROM users WHERE email = $1';
+  const getUserWithUsername = (userId) => {
+    const queryString =  `
+    SELECT * 
+    FROM users 
+    WHERE username = $1
+    `
     return db
-    .query(queryString, [email])
-    .then(res => (res.rows[0]))
-  }
-
-  const getUserWithUsername = function(username) {
-    const queryString = `SELECT * FROM users WHERE username = $1`;
-    return db
-    .query(queryString, [username])
-    .then(res => (res.rows[0]))
+      .query(queryString, [userId])
+      .then(res => (res.rows[0]))
   }
 
   const addUser = function (username, email, password, name, avatar) {
@@ -29,6 +25,17 @@ module.exports = (db) => {
       .then(res => (res.rows[0]))
   }
 
+
+  const getUserwithEmail = function (email) {
+    const queryString = `
+    SELECT * 
+    FROM users 
+    WHERE email = $1`
+    return db
+      .query(queryString, [email])
+      .then(res => (res.rows[0]))
+  };
+  
   const authenticateUser =  function(email, password) {
     return getUserwithEmail(email)
     .then(user => {
@@ -38,35 +45,33 @@ module.exports = (db) => {
       return null;
     });
   }
-
   router.get("/register", (req, res) => {
     let user = req.session.userId;
-    res.render("registration", {user});
+    let username = req.params.username;
+    res.render("registration", { user, username});
   });
 
-// ---- User to sign in---
+  // ---- User to sign in---
   router.post('/login', (req, res) => {
-    const {email, password} = req.body;
+    const { email, password } = req.body;
     console.log(email);
 
     getUserwithEmail(email)
-    .then(user => {
-      if(!user) {
-        res.status(300).redirect('/register');
-      }
-    });
+      .then(user => {
+        if (!user) {
+          res.status(300).redirect('/register');
+        }
+      });
     authenticateUser(email, password)
-    .then(user => {
-      console.log('hello!', user)
-      if (!user) {
-        res.status(300).send('An incorrect password was entered!');
-      }
-      req.session.userId = user.id;
-      console.log(req.session.userId)
-      let username = user.username;
-      res.redirect(`/users/${username}`);
-    })
-    .catch(e => res.send(e));
+      .then(user => {
+        if (!user) {
+          res.status(300).send('An incorrect password was entered!');
+        }
+        req.session.userId = user.id;
+        let username = user.username;
+        res.redirect(`/users/${username}`);
+      })
+      .catch(e => res.send(e));
   });
 
   //logout
@@ -84,14 +89,14 @@ module.exports = (db) => {
     const password = user.password;
     const hashedPassword = bcrypt.hashSync(password, 12);
 
-    if (!email || !password ||!username) {
+    if (!email || !password || !username) {
       res.status(400).send("Fields cannot be blank!");
     }
 
     Promise
       .all([getUserwithEmail(email), getUserWithUsername(username)])
       .then(([resultByEmail, resultByUsername]) => {
-        if(resultByEmail || resultByUsername){
+        if (resultByEmail || resultByUsername) {
           res.status(400).send("An account with this email or username already exists!");
         } else {
           addUser(username, email, hashedPassword, name, avatar).then(user => {
@@ -100,7 +105,7 @@ module.exports = (db) => {
           })
         }
       })
-})
+  })
 
-return router
+  return router
 }

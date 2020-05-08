@@ -15,7 +15,6 @@
     <script type="text/javascript" src="/scripts/client.js"></script>
   </head>
   <body>
-    <%- include('partials/navbar_logged_out') %>
     <div class="main">
       <div class="header">
         <h2>Learn About... <%= category %></h2>
@@ -38,7 +37,7 @@
           <button type ="submit">Teach Me</button>
         </form>
       </div>
-        <% for (let resource of resources) { %>
+      <% for (let resource of resources) { %>
       <div class="result">
         <div class="thumbnail">
           <img src="https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg">
