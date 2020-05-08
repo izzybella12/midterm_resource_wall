@@ -50,23 +50,29 @@ section.resource_info {
 
   div.bookmark_like {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: 60%;
     align-self: center;
     margin-top: 2em;
     margin-right: 1em;
     margin-left: 1em;
-    i.material-icons{
-      margin-right: 1%;
-      font-size: 30px;
-      cursor: default;
-      color: white
-    }
-    #heart {
-      margin-top: 1%;
-    }
-    #heart:hover {
-      color: red;
+    div.like {
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 2%;
+      i.material-icons{
+        margin-right: 1%;
+        font-size: 30px;
+        cursor: default;
+        color: white
+      }
+      #heart {
+        margin-top: -1%;
+        margin-left: 1%;
+      }
+      #heart:hover {
+        color: red;
+      }
     }
     span.rating_resource_info {
       margin-top: .5%;

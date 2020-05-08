@@ -62,10 +62,6 @@ module.exports = (db) => {
   }
 
   const addLike = function(resource_id, user_id) {
-<<<<<<< HEAD
-=======
-
->>>>>>> d4f17083f19232a2b53025e1e6ee17ac8c4cc26c
     let queryString = `
     INSERT INTO resource_reviews(liking, resource_id, user_id) VALUES(TRUE, $1, $2)`
 
