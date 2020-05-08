@@ -53,17 +53,10 @@ module.exports = (db) => {
   const addRating = function(rating, resource_id, user_id) {
     let queryString = `
     INSERT INTO resource_reviews(rating, resource_id, user_id) VALUES($1, $2, $3)`
-
     return db.query(queryString, [rating, resource_id, user_id])
   }
 
   const addLike = function(resource_id, user_id) {
-    // let queryString =`
-    //   UPDATE resource_reviews
-    //   SET liking = T
-    //   WHERE resource_id = $1 AND user_id = $2
-    //   `
-
     let queryString = `
     INSERT INTO resource_reviews(liking, resource_id, user_id) VALUES(TRUE, $1, $2)`
 

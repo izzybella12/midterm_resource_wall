@@ -1,21 +1,23 @@
 $(document).ready(function() {
   console.log("Rating Document Ready")
 
-  const resourceID = $('#resource-id').val();
+  const resourceId = $('#resource-id').val();
 
-  $('#star1').on('click', function(event) {
+  $('star1').one('click', function(event) {
     event.preventDefault();
+    $('star2').css("color", "red");
     const rating = {
       rating: 1
     }
-    $.ajax(`/resources/${resourceID}/ratings/new`, { method: 'POST', data: rating})
+    $.ajax(`/resources/${resourceId}/ratings/new`, { method: 'POST', data: rating})
     .then(function(response) {
       console.log('Rating 1 successfully added', response)
     })
   })
 
-  $('#star2').on('click', function(event) {
+  $('star2').on('click', function(event) {
     event.preventDefault();
+    $('star2').css("color", "red");
     const rating = {
       rating: 2
     }
@@ -25,7 +27,7 @@ $(document).ready(function() {
     })
   })
 
-  $('#star3').on('click', function(event) {
+  $('star3').on('click', function(event) {
     event.preventDefault();
     const rating = {
       rating: 3
@@ -36,7 +38,7 @@ $(document).ready(function() {
     })
   })
 
-  $('#star4').on('click', function(event) {
+  $('star4').on('click', function(event) {
     event.preventDefault();
     const rating = {
       rating: 4
@@ -47,7 +49,7 @@ $(document).ready(function() {
     })
   })
 
-  $('#star5').on('click', function(event) {
+  $('star5').on('click', function(event) {
     event.preventDefault();
     const rating = {
       rating: 5
