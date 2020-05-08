@@ -52,7 +52,7 @@ module.exports = (db) => {
 
   const addRating = function(rating, resource_id, user_id) {
     let queryString = `
-    INSERT INTO resource_reviews(rating, resource_id, user_id) VALUES($1,$2, $3)`
+    INSERT INTO resource_reviews(rating, resource_id, user_id) VALUES($1, $2, $3)`
 
     return db.query(queryString, [rating, resource_id, user_id])
   }
@@ -168,17 +168,17 @@ module.exports = (db) => {
         res.render('categoryId', {resources, category, moment, user});
       })
       .catch((err) => (res.status(404).send(err)));
-    
+
     } else if (category === 'surprise') {
       getResource(chooseCategory)
       .then(resources => {
         res.render('categoryId', {resources, category, moment, user});
       })
       .catch((err) => (res.status(404).send(err)));
-    
+
     } else if (!categories.includes(category)) {
       res.status(404).send(`There is not category named ${category}, please go pick another category! <a href='/'>Back to homepage</a>` );
-    
+
     } else {
       getResource(category)
       .then (resources => {
@@ -205,27 +205,27 @@ module.exports = (db) => {
 
   router.post("/:resource_id/comments/new", (req, res) => {
     const resource_id = req.params.resource_id;
-    const user_id = req.session.user_id;
+    const user_id = req.session.userId;
     const comment = req.body.comment;
 
-    addComment(comment, resource_id, 1)
+    addComment(comment, resource_id, user_id)
       .then(dbRes => res.json("OK"))
   });
 
   router.post("/:resource_id/likes/new", (req, res) => {
     const resource_id = req.params.resource_id;
-    const user_id = req.session.user_id;
+    const user_id = req.session.userId;
 
     addLike(resource_id, user_id)
     .then(dbRes => res.json("OK"))
   });
 
   router.post("/:resource_id/ratings/new", (req, res) => {
-    const rating = req.params.rating;
+    const rating = req.body.rating;
     const resource_id = req.params.resource_id;
-    const user_id = req.session.user_id;
+    const user_id = req.session.userId;
 
-    addRating(rating, resource_id, 1)
+    addRating(rating, resource_id, user_id)
     .then(dbRes => res.json("OK"))
   });
 
