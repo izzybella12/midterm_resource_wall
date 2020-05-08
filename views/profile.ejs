@@ -23,22 +23,21 @@
         <h5>Welcome <span><%= username %></span></h5>
         <a href='/users/<%= username %>/edit' class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Edit Profile</a>
       </div>
-    </div>
+  </div>
     <div class="tabs">
       <a href="/users/<%= username %>/rated"><span>rated</span></a>
       <a href="/users/<%= username %>/created"><span>created</span></a>
       <a href="/users/<%= username %>/liked"><span>liked</span></a>
     </div>
    </header>
+   <% for (let resource of resources) { %>
     <div class="gallery">
-      <% for (let resource of resources) { %>
         <div class="resource">
-          <a href="/resources/<%= resource.id %>"><p>title: <%= resource.title %></p></a>
-          <p>description: <%= resource.description %></p>
-          <p>category: <%= resource.category %></p>
-          <p>created: <%= moment(resource.created_at).fromNow() %></p>
+          <p class="title"><a href="/resources/<%= resource.id %>"><%= resource.title %></a></p>
+          <p> <%= resource.description %></p>
+          <p class="category"> <%= resource.category %></p>
+          <p><%= moment(resource.created_at).fromNow() %></p>
         </div>
-      </div>
     </div>
     <% } %>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
