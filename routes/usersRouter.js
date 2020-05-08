@@ -34,17 +34,6 @@ module.exports = (db) => {
     .query(queryString, [username, fullName, email, password, id])
   };
 
-  const getUserInfo = (username) => {
-    const queryString = `
-    SELECT *
-    FROM USERS
-    WHERE username = $1`
-
-    return db
-    .query(queryString, [username])
-    .then(res => res.rows[0])
-  };
-
   router.get('/:username', (req, res) => {
     let username = req.params.username;
     let user = req.session.userId;
@@ -69,7 +58,6 @@ module.exports = (db) => {
       let username = new_username;
       res.redirect(`/users/${username}`)
     })
-  });
 
   router.get('/:username/edit', (req, res) => {
     let username = req.params.username;
