@@ -1,12 +1,6 @@
-/*
- * All routes for Users are defined here
- * Since this file is loaded in server.js into api/users,
- *   these routes are mounted onto /users
- * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
- */
-
 const express = require('express');
 const router  = express.Router();
+const { Pool } = require("pg");
 const bcrypt = require('bcrypt');
 const moment = require('moment');
 
@@ -43,6 +37,15 @@ module.exports = (db) => {
     })
   });
 
+  // const getUserwith = function(email) {
+  //   const queryString = 'SELECT * FROM users WHERE email = $1';
+  //   return db
+  //   .query(queryString, [email])
+  //   .then(res => (res.rows[0]))
+  // }
+
+
+
   router.post('/:username/edit', (req, res) => {
     const user = req.body;
     const name = user.fullName;
@@ -51,26 +54,75 @@ module.exports = (db) => {
     const email = user.email
     const userId = req.session.userId
     if (!userId) {
-      res.status(401).send("sorry not your profile!")
+      res.send("sorry not your user!")
     }
     updateUserProfile(new_username, name, email, password, userId)
     .then(user => {
       let username = new_username;
-      res.redirect(`/users/${username}`)
+      res.redirect(`/users/login/${username}`)
     })
+  })
+
+  const getUserInfo = (username) => {
+    const queryString = `
+    SELECT *
+    FROM USERS
+    WHERE username = $1`
+
+    return db
+    .query(queryString, [username])
+    .then(res => res.rows[0])
+  }
 
   router.get('/:username/edit', (req, res) => {
     let username = req.params.username;
     const userId = req.session.userId
     if (!userId) {
-      res.status(404).send('sorry you do not have access')
+      res.send('sorry you dont have access')
     }
     getUserInfo(username)
     .then(user => {
-      res.render('editProfile', {user, username});
+      res.render('editProfile', {user, username})
     })
   });
 
+  router.get('/:username/edit', (req, res) => {
+    let username = req.params.username;
+    const userId = req.session.userId
+    if (!userId) {
+      res.send('sorry you dont have access')
+    }
+    getUserInfo(username)
+    .then(user => {
+      res.render('editProfile', {user, username})
+    });
+  });
+  
+  router.get('/:username/edit', (req, res) => {
+    let username = req.params.username;
+    const userId = req.session.userId
+    if (!userId) {
+      res.send('sorry you dont have access')
+    }
+    getUserInfo(username)
+    .then(user => {
+      res.render('editProfile', {user, username})
+    })
+  });
+
+  router.get('/:username/edit', (req, res) => {
+    let username = req.params.username;
+    const userId = req.session.userId
+    if (!userId) {
+      res.send('sorry you dont have access')
+    }
+    getUserInfo(username)
+    .then(user => {
+      res.render('editProfile', {user, username})
+    })
+  })
+  
+  
   return router;
 };
 

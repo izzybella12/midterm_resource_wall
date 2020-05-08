@@ -128,7 +128,36 @@ module.exports = (db) => {
   //   res.redirect(`/resources/categories/${category}`)
   // });
 
-   
+  router.get('/create'), (req, res) => {
+    res.render('resource_new');
+  }
+
+  router.post('/create', (req, res) => {
+    const resource = req.body;
+    const title = resource.title;
+    const description = resource.description;
+    const url = resource.url;
+    const category = resource.category;
+    const keywords = resource.keywords;
+    const userId = req.session.userId
+
+    if (category === 'Category') {
+      res.status(404).send("Please pick a category!")
+    }
+    Promise
+    .all([checkUrl(url), getUsername(userId)])
+    .then(([resultByUrl, resultByUsername]) => {
+      const username = resultByUsername.rows[0].username
+      if (resultByUrl.rowCount) {
+        res.status(400).send("A resource with this url has already exists!");
+      } else {
+        addResource(title, description, url, category, keywords, userId)
+        .then(result => {
+          res.redirect(`/users/${username}`)
+        })
+      }
+    })
+  });
 
 
 
@@ -162,35 +191,6 @@ module.exports = (db) => {
     };
   })
 
-  router.get('/create'), (req, res) => {
-    res.render('resource_new');
-  }
-  router.post('/create', (req, res) => {
-    const resource = req.body;
-    const title = resource.title;
-    const description = resource.description;
-    const url = resource.url;
-    const category = resource.category;
-    const keywords = resource.keywords;
-    const userId = req.session.userId
-
-    if (category === 'Category') {
-      res.status(404).send("Please pick a category!")
-    }
-    Promise
-    .all([checkUrl(url), getUsername(userId)])
-    .then(([resultByUrl, resultByUsername]) => {
-      const username = resultByUsername.rows[0].username
-      if (resultByUrl.rowCount) {
-        res.status(400).send("A resource with this url has already exists!");
-      } else {
-        addResource(title, description, url, category, keywords, userId)
-        .then(result => {
-          res.redirect(`/users/${username}`)
-        })
-      }
-    })
-  });
 
   router.get("/:resource_id", (req, res) => {
       let id = req.params.resource_id;
