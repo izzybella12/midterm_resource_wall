@@ -13,7 +13,7 @@ $(document).ready(function() {
     // Connect with login
     const $comment = $(`
     <i class="material-icons">face</i>
-    <span class="profile_username">USER_ID</span>
+    <span class="profile_username">${commentData.username}</span>
     <span class="profile_comment">${escape(problematicText)}</span>
     `);
     return $comment;

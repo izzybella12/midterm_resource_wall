@@ -71,7 +71,7 @@
             <div id="comment_container">
             <ul id='comment-list'>
               <% for (let commentObj of singleResource.comments) { %>
-                @<%= commentObj.username %> <%= commentObj.comment %>
+                <i class="material-icons">face</i> @<%= commentObj.username %> <%= commentObj.comment %>
               <% } %>
               </ul>
             </div>

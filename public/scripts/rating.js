@@ -50,7 +50,7 @@ $(document).ready(function() {
     const rating = {
       rating: 5
     }
-    $.ajax('/resources/:resource_id/ratings/new', { method: 'POST', data: {rating})
+    $.ajax('/resources/:resource_id/ratings/new', { method: 'POST', data: rating})
     .then(function(response) {
       console.log('Rating 5 successfully added', response)
     })
