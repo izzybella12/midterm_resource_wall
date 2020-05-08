@@ -17,26 +17,27 @@
 
   <body>
     <div>
-     <%- include('partials/navbar_logged_out') %> 
+     <%- include('partials/navbar_logged_out') %>
     </div>
-  
+
     <main class="resource_new">
       <form method="POST" action="/resources/create">
         <div class="form_input">
           <h2>Create a new resource</h2>
         <div>
+        <div class="labelwrapper">
           <label for="title"> Title:</label>
           <input class="new_resource_textbox" type="text" name="title" required placeholder="Title"></input>
         </div>
-        <div>
+        <div class="labelwrapper">
           <label for="description"> Description:</label>
           <textarea class="new_resource_textbox" type="text" name="description" required placeholder="Description"></textarea>
         </div>
-        <div>
+        <div class="labelwrapper">
           <label for="Website"> Website Link:</label>
           <input class="new_resource_textbox" type="text" name="url" required placeholder="Link"></input>
         </div>
-        <div>
+        <div class="labelwrapper">
           <label for="Category"> Category:</label>
           <select class="new_resource_textbox" name="category" required>
             <option value="Category">Category</option>
@@ -52,13 +53,11 @@
             <option value ="Education & Communication">Education & Communication</option>
           </select>
         </div>
-        <div>
+        <div class="labelwrapper">
           <label for="keyword"> Keywords:</label>
           <input class="new_resource_textbox" type="text" name="keywords" required placeholder="Keywords"></input>
         </div>
-        <!-- <form method="POST" action="/profile"> -->
-          <button type="submit">Submit</button>
-        <!-- </form> -->
+        <button type="submit">Submit</button>
         </div>
       </form>
     </main>

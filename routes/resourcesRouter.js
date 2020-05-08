@@ -63,7 +63,7 @@ module.exports = (db) => {
   }
 
   const addLike = function(resource_id, user_id) {
-    
+
     let queryString = `
     INSERT INTO resource_reviews(liking, resource_id, user_id) VALUES(TRUE, $1, $2)`
 
@@ -115,15 +115,8 @@ module.exports = (db) => {
   }
 
   //Routing for cat form to redirect to form
-  // router.get("categories/:cateogory_id", (req, res) => {
-  //   res.render("category");
-  // })
 
-  // router.post("/categories/:category", (req, res) => {
-  //   const category = req.body.categories;
-  //   console.log(category)
-  //   res.redirect(`/resources/categories/${category}`)
-  // });
+
 
   router.get('/create', (req, res) => {
     let user = req.session.userId
@@ -157,6 +150,10 @@ module.exports = (db) => {
       })
   });
 
+  // router.post("/categories/category", (req, res) => {
+  //   res.render("categoryId", );
+  // })
+
 
 
   router.get("/categories/:category", (req, res) => {
@@ -184,7 +181,7 @@ module.exports = (db) => {
       .catch((err) => (res.status(500).send(err)));
     };
   })
-  
+
 
   router.get("/:resource_id", (req, res) => {
     let id = req.params.resource_id;
@@ -196,7 +193,7 @@ module.exports = (db) => {
         const username = resultUsername.rows[0].username;
         const sResource = resultSingleResource[0];
         const comments = resultAllComments;
-        // const sResource = resultSingleResource[0][0]; //comments 
+        // const sResource = resultSingleResource[0][0]; //comments
         // sResource.comments = resultAllComments[1]; //everything that  resource is rendering on the page
         res.render('resource', { sResource, comments, user, username});
       })

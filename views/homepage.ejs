@@ -21,21 +21,23 @@
     <main>
       <section class="search_box">
         <form method="POST" action="/">
-          <label>What do you want to learn about today?</label>
-          <select class="dropdown" name ="categories"  >
-              <option disabled selected value='pick'> ---- category ---- </option>
-              <option value="Automotive">Automotive</options>
-              <option value ="Health & Personal Care">Health & Personal Care</option>
-              <option value="Hobbies & Crafts">Hobbies & Crafts</options>
-              <option value ="Technology">Technology</option>
-              <option value="Home Improvement">Home Improvement</option>
-              <option value="Cooking & Baking">Cooking & Baking</option>
-              <option value="Lifestyle">Lifestyle</option>
-              <option value="Fitness & Wellness">Fitness & Wellness</option>
-              <option value="Finance & Business">Finance & Business</option>
-              <option value ="Education & Communication">Education & Communication</option>
+          <h1>What do you want to learn about today?</h1>
+          <div class="categoryWrapper">
+            <select class="dropdown" name ="categories"  >
+                <option disabled selected value='pick'> ---- category ---- </option>
+                <option value="Automotive">Automotive</options>
+                <option value ="Health & Personal Care">Health & Personal Care</option>
+                <option value="Hobbies & Crafts">Hobbies & Crafts</options>
+                <option value ="Technology">Technology</option>
+                <option value="Home Improvement">Home Improvement</option>
+                <option value="Cooking & Baking">Cooking & Baking</option>
+                <option value="Lifestyle">Lifestyle</option>
+                <option value="Fitness & Wellness">Fitness & Wellness</option>
+                <option value="Finance & Business">Finance & Business</option>
+                <option value ="Education & Communication">Education & Communication</option>
             </select>
-              <button type ="submit">Teach Me</button>
+            <button type ="submit">Teach Me</button>
+            </div>
         </form>
         <div class="search_anchors">
           <a class="search_anchors" href="/resources/categories/trending">Trending</a>
