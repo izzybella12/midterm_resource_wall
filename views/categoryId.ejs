@@ -39,12 +39,14 @@
       </div>
       <% for (let resource of resources) { %>
       <div class="result">
+        
         <div class="thumbnail">
           <img src="https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg">
         </div>
+
         <div class= "description resource">
           <div class="info">
-            <p class="title"><%= resource.title %></p>
+            <a href="/resources/<%= resource.id %>"><p class="Title"><%= resource.title %></p></a>
             <p><%= resource.description %></p>
             <p>rating:<%= (Math.floor(resource.rating * 100) /100 ).toFixed(2) %></p>
           </div>

@@ -25,16 +25,15 @@
       </div>
     </div>
     <div class="tabs">
-      <span>rated</span>
-      <span>pinned</span>
-      <span>created</span>
-      <span>liked</span>
+      <a href="/users/<%= username %>/rated"><span>rated</span></a>
+      <a href="/users/<%= username %>/created"><span>created</span></a>
+      <a href="/users/<%= username %>/liked"><span>liked</span></a>
     </div>
    </header>
     <div class="gallery">
       <% for (let resource of resources) { %>
         <div class="resource">
-          <p>title: <%= resource.title %></p>
+          <a href="/resources/<%= resource.id %>"><p>title: <%= resource.title %></p></a>
           <p>description: <%= resource.description %></p>
           <p>category: <%= resource.category %></p>
           <p>created: <%= moment(resource.created_at).fromNow() %></p>

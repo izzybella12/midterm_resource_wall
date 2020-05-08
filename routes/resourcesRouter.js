@@ -42,7 +42,7 @@ module.exports = (db) => {
     SELECT comment, users.username
     FROM resource_reviews
     JOIN users ON user_id = users.id
-    WHERE resource_id = $1
+    WHERE resource_id = $1 AND comment IS NOT NULL
     `
     return db
       .query(queryString, [resourceID])
@@ -75,7 +75,7 @@ module.exports = (db) => {
       SELECT resources.*, AVG(resource_reviews.rating) AS rating
       FROM resources
       LEFT JOIN resource_reviews ON resource_id = resources.id
-      WHERE created_at >= NOW() - INTERVAL '24 HOURS'
+      WHERE created_at >= NOW() - INTERVAL '168 HOURS'
       GROUP BY resources.id
       ORDER BY created_at DESC;
     `
@@ -126,9 +126,8 @@ module.exports = (db) => {
   // });
 
   router.get('/create', (req, res) => {
-    let user = req.session.userId;
-    const username = 'judy'
-    res.render('resource_new', {user, username});
+    let user = req.session.userId
+    res.render('resource_new', {user});
   })
 
   router.post('/create', (req, res) => {
@@ -185,19 +184,21 @@ module.exports = (db) => {
       .catch((err) => (res.status(500).send(err)));
     };
   })
-
+  
 
   router.get("/:resource_id", (req, res) => {
     let id = req.params.resource_id;
-    let username = req.params.username
+    let user = req.session.userId;
 
     Promise
-      .all([getSingleResource(id), allComments(id)])
-      .then(results => {
-        const sResource = results[0][0];
-        sResource.comments = results[1];
-        let user = req.session.userId;
-        res.render('resource', { singleResource: sResource, user});
+      .all([getSingleResource(id), allComments(id), getUsername(user)])
+      .then(([resultSingleResource, resultAllComments, resultUsername]) => {
+        const username = resultUsername.rows[0].username;
+        const sResource = resultSingleResource[0];
+        const comments = resultAllComments;
+        // const sResource = resultSingleResource[0][0]; //comments 
+        // sResource.comments = resultAllComments[1]; //everything that  resource is rendering on the page
+        res.render('resource', { sResource, comments, user, username});
       })
       .catch((err) => (console.log("500", err.message)));
   });
